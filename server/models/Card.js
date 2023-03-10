@@ -1,5 +1,7 @@
 const { Schema } = require("mongoose");
 const dateFormat = require('../utils/dateFormat')
+const mongoose = require('mongoose')
+
 
 const cardSchema = new Schema({
     question: {

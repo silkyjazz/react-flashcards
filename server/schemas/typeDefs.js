@@ -46,7 +46,7 @@ const typeDefs = gql`
 
     input newDeck {
         name: String!
-        cards: [Card]
+        card: String!
     }
 
     type Mutation {
