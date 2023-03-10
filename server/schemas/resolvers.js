@@ -27,19 +27,26 @@ const resolvers = {
 
     Mutation: {
 
-        createDeck: async (_, { name }, context) => {
-            if (context.user) {
-                const decks = await Deck.create({
+        createDeck: async (_, { userId, name }, context) => {
+            // if (context.user) {
+                // const decks = await Deck.create({
+                //     name
+                // });
+        const decks = await Deck.create({
                     name
-                });
+                })
 
-                await User.findOneAndUpdate(
-                    { _id: context.user._id },
+                // await User.findOneAndUpdate(
+                    // { _id: context.user._id },
+                //     { $addToSet: { deck: decks._id } }
+                // );
+                                await User.findOneAndUpdate(
+                    { _id: userId },
                     { $addToSet: { deck: decks._id } }
                 );
 
-                return deck;
-            }
+                return decks;
+            // }
             throw new AuthenticationError('You need to be logged in!');
         },
         deleteDeck: async (parent, { deckId }) => {
@@ -76,10 +83,13 @@ const resolvers = {
             throw new AuthenticationError("Couldn't find a deck with this id!");
         },
 
-        createUser: async (parent, { username, email, password }) => {
+        createUser: async (parent, args ) => {
             const user = await User.create(args);
-            const token = signToken(user);
-            return { token, user };
+            // const token = signToken(user);
+            // return { token, user };
+            console.log('successfully created '+ user)
+            return { user };
+
         },
         login: async (_, { email, password }) => {
             const user = await User.findOne({ email });
