@@ -1,0 +1,29 @@
+{
+  "name": "react-flashcards",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node server --ignore client",
+    "develop": "concurrently \"cd server && npm run start\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silkyjazz/react-flashcards.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/silkyjazz/react-flashcards/issues"
+  },
+  "homepage": "https://github.com/silkyjazz/react-flashcards#readme",
+  "dependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
