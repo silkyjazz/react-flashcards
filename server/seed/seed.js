@@ -8,14 +8,14 @@ const randomUser = (users) => {
   return index;
 };
 
-const seedUsers = (numberOfUsers) => {
+const seedingUsers = (numberOfUsers) => {
   let result = [];
   for (let i = 0; i < numberOfUsers; i++) {
     const user = new User({
       username: faker.internet.userName(),
       email: faker.internet.email(),
       password: "password123",
-      deck: [],
+      decks: [],
     });
     result.push(user);
   }
@@ -34,7 +34,7 @@ const seedUsers = (numberOfUsers) => {
 //     return cards;
 //   };
 
-const seedCards = (numOfCards) => {
+const seedingCards = (numOfCards) => {
     // Generate random cards
     const result = [];
     for (let i = 0; i < numOfCards; i++) {
@@ -47,7 +47,7 @@ const seedCards = (numOfCards) => {
     return result;
   };
 
-const seedDecks = (usersArray, numOfDecks) => {
+const seedingDecks = (usersArray, numOfDecks) => {
   let result = [];
   for (let i = 0; i < numOfDecks; i++) {
     const deck = new Deck({
@@ -70,30 +70,30 @@ connection.once("open", async () => {
   await Card.deleteMany({});
   
   // Generate random users
-  const users = seedUsers(2);
-  const decks = seedDecks(users, 3);
-  const cards = seedCards(21);
+  const seedUsers = seedingUsers(2);
+  const seedDecks = seedingDecks(seedUsers, 3);
+  const seedCards = seedingCards(21);
 
 
-  for (let i = 0; i < users.length; i++) {
-    for ( let k = 0; k < decks.length; k++) {
-      if (decks[k].username === users[i].username) {
-        users[i].deck.push(decks[k])
+  for (let i = 0; i < seedUsers.length; i++) {
+    for ( let k = 0; k < seedDecks.length; k++) {
+      if (seedDecks[k].username === seedUsers[i].username) {
+        seedUsers[i].decks.push(seedDecks[k])
       }
     }
   }
 
-  for (let i = 0; i < cards.length; i++) {
-    const randomDeckIndex = Math.floor(Math.random() * decks.length);
-    const cardId = cards[i]._id;
-    decks[randomDeckIndex].cards.push(cardId)
+  for (let i = 0; i < seedCards.length; i++) {
+    const randomDeckIndex = Math.floor(Math.random() * seedDecks.length);
+    const cardId = seedCards[i]._id;
+    seedDecks[randomDeckIndex].cards.push(cardId)
   }
-
+seedUsers
 //   console.log("========================\n", ...users);
 //   console.log("========================\n", ...decks);
-  const createdUsers = await User.collection.insertMany(users);
-  const createdDecks = await Deck.collection.insertMany(decks);
-  const createdCards = await Card.collection.insertMany(cards);
+  const createdUsers = await User.collection.insertMany(seedUsers);
+  const createdDecks = await Deck.collection.insertMany(seedDecks);
+  const createdCards = await Card.collection.insertMany(seedCards);
   console.log("Seed data generated and saved to the database");
   process.exit(0)
 });
