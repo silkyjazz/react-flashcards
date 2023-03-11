@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "watch": "nodemon"
+    "watch": "nodemon",
+    "seed": "node ./seed/seed.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "mongoose": "^7.0.1"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "nodemon": "^2.0.21"
   }
 }
