@@ -46,16 +46,6 @@ const typeDefs = gql`
         createUser(username: String!, email: String!, password: String!): User
         login(email: String!, password: String!): Auth
     }
-
-    input newCard {
-        question: String!
-        answer: String!
-    }
-
-    input newDeck {
-        name: String!
-       
-    }
 `;
 
 module.exports = typeDefs;
