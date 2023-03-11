@@ -3,32 +3,53 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Serif+Malayalam&display=swap');
 
+* {
+    /* background-color: #3F497F; */
+    background-color:rgba(248, 245, 228);
+    color: #3F497F;
+    font-family: 'Noto Serif Malayalam', serif;
+}
+#title {
+    color:  #F8F5E4;
+    font-family: 'Anton', sans-serif;
+    font-size: 35px;
+}
+/* #navbar{
+    background-color: #F8F5E4;
+} */
 .navbar-logo {
     height: 80px;
     margin-right: 10px;
     max-width: 100%;
 }
-#links{
-    color: #F8F5E4;
-}
-a{
-    text-decoration: none;
-}
-#title {
-    color: #F8F5E4;
-    font-family: 'Anton', sans-serif;
-    font-size: 35px;
-}
+.btn {
+    margin-right: 10px;
+    background: #3F497F;
+  }
 .heading{
     font-family: 'Bebas Neue', cursive;
     font-size: 75px;
     display: flex;
     justify-content: center;
 }
-* {
-    background-color: #3F497F;
-    color: #F8F5E4;
-    font-family: 'Noto Serif Malayalam', serif;
-
-
+.landing-container{
+    /* background-color: rgba(63, 73, 127, 0.8); */
+    background: url('./images/landing-image-full.png') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 130px;
+}
+/* .landing-top{
+    /* background-color: #3F497F;
+    padding: 50px 0;  
+} */
+.landing-middle{
+    background-color: #F8F5E4;
+    padding: 50px 0; 
+}
+.landing-images{
+    width: 70%;
+    height: auto;
 }

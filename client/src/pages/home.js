@@ -1,17 +1,17 @@
 import React from "react";
 import { Card, Row, Col, Container } from "react-bootstrap";
-import Image from "../images/icon-1.png";
-import deckImage from '../images/deck.png';
+// import Image from "../images/icon-1.png";
+import lpDeck from '../images/deck.png';
+import lpCard from '../images/card.png';
+import lpHabit from '../images/habit.png';
 
 function Home() {
+ 
   return (
     <>
-      <Container className="landing">
+      <Container className="landing-container">
         <Row>
-          <Col lg={6} md={6} sm={12}>
-            <img src={Image} alt="Card" />
-          </Col>
-          <Col lg={6} md={6} sm={12}>
+          <Col lg={6} md={6} sm={12} className="text-center">
             <h1 className="heading">Welcome to the ultimate study tool! </h1>
             <p>
               Our flashcard study website is
@@ -27,15 +27,17 @@ function Home() {
             </p>
           </Col>
         </Row>
-        <Row className="landing-image-row m-5">
-            <Col lg={4}>
-            <Card.Img variant="top" src={deckImage} />
+   </Container>
+   <Container>
+        <Row>
+            <Col className="landing-middle" lg={4} sm={6}>
+            <img src={lpDeck} className="landing-images" alt="Create a deck" />
             </Col>
-            <Col lg={4}>
-            <Card.Img variant="top" src={deckImage} />
+            <Col  className="landing-middle"lg={4} sm={6}>
+            <img src={lpCard} className="landing-images"  alt="Create a deck" />
             </Col>
-            <Col lg={4}>
-            <Card.Img variant="top" src={deckImage} />
+            <Col  className="landing-middle" lg={4} sm={6}>
+            <img src={lpHabit} className="landing-images"  alt="Create a deck" />
             </Col>
         </Row>
       </Container>
