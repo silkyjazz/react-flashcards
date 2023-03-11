@@ -24,8 +24,6 @@
   },
   "homepage": "https://github.com/silkyjazz/react-flashcards#readme",
   "dependencies": {
-    "@hookform/error-message": "^2.0.1",
     "concurrently": "^7.6.0",
-    "react-hook-form": "^7.43.5"
   }
 }
