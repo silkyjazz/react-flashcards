@@ -9,10 +9,10 @@ const cardSchema = new Schema({
         require: true,
         maxLength: 255
     },
-    choices:{
-        type: [String],
-        require: true
-    },
+    // choices:{
+    //     type: [String],
+    //     require: true
+    // },
     answer: {
         type: String,
         require: true
