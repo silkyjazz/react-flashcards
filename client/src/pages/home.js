@@ -13,14 +13,14 @@ function Home() {
         <Row>
           <Col lg={6} md={6} sm={12} className="text-center">
             <h1 className="heading">Welcome to the ultimate study tool! </h1>
-            <p>
+            <p className= "landing-text">
               Our flashcard study website is
               the perfect resource for anyone who wants to master any subject.
               With our interactive and customizable flashcards, you'll be able
               to study smarter, not harder.
             </p>
             <br></br>
-            <p>
+            <p className= "landing-text">
              Ready to start learning?
              Sign up for free. Don't miss out on this opportunity to
               revolutionize the way you study!
