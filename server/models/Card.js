@@ -1,5 +1,6 @@
 const { Schema } = require("mongoose");
-const mongoose = require('mongoose');
+const dateFormat = require('../utils/dateFormat')
+const mongoose = require('mongoose')
 
 
 const cardSchema = new Schema({
@@ -8,14 +9,19 @@ const cardSchema = new Schema({
         require: true,
         maxLength: 255
     },
-    choices:{
-        type: [String],
-        require: true
-    },
+    // choices:{
+    //     type: [String],
+    //     require: true
+    // },
     answer: {
         type: String,
         require: true
-    }
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+      },
 })
 
 // create an instance of Card schema
