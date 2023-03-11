@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node server --ignore client",
+    "start": "nodemon server --ignore client",
     "develop": "concurrently \"cd server && npm run start\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "seed": "cd server && npm run seed",
@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/silkyjazz/react-flashcards#readme",
   "dependencies": {
-    "concurrently": "^7.6.0"
+    "@hookform/error-message": "^2.0.1",
+    "concurrently": "^7.6.0",
+    "react-hook-form": "^7.43.5"
   }
 }

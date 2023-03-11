@@ -1,10 +1,9 @@
 const { Schema } = require("mongoose");
 const bcrypt = require("bcrypt");
-const deck = require("./Deck");
+const Deck = require("./Deck");
 const mongoose = require('mongoose')
 
 
-// TODO: 
 const userSchema = new Schema({
   username: {
     type: String,
@@ -24,7 +23,7 @@ const userSchema = new Schema({
     minlength: 5,
     maxLength: 14,
   },
-  deck: [
+  decks: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Deck',
