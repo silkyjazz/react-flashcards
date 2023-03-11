@@ -26,11 +26,26 @@ const typeDefs = gql`
     }
 
     type Query {
-        user: User
-        decks: [Deck]
+        user(username: String!): User
+
+        decks(username: String!): [Deck]
         deck(_id: ID!): Deck
-        cards: [Card]
+        cards(username: String!): [Card]
         card(_id: ID!): Card
+    }
+
+    type Mutation {
+        createDeck(usernameId: ID!, name: String! ): Deck
+        createCard(input: newCard): Card
+        deleteDeck(_id: ID!): Deck
+        deleteCard(_id: ID!): Card
+
+        updateDeck(_id: ID!, input: [newCard]!): Deck
+        updateCard(_id: ID!, question: String!, answer: String!): Card
+
+        addCardToDeck(_id: ID, CardId: ID): Deck
+        createUser(username: String!, email: String!, password: String!): Auth
+        login(email: String!, password: String!): Auth
     }
 
     input newUser {
@@ -46,21 +61,7 @@ const typeDefs = gql`
 
     input newDeck {
         name: String!
-        card: String!
-    }
-
-    type Mutation {
-        createDeck(input: newDeck): Deck
-        createCard(input: newCard): Card
-        deleteDeck(_id: ID!): Deck
-        deleteCard(_id: ID!): Card
-
-        updateDeck(_id: ID!, input: [newCard]!): Deck
-        updateCard(_id: ID!, question: String!, answer: String!): Card
-
-
-        createUser(input: newUser!): User!
-        login(email: String!, password: String!): Auth
+       
     }
 `;
 

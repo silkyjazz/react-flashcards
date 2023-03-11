@@ -1,0 +1,2 @@
+
+// its for /:deck/study
