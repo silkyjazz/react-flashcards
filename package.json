@@ -24,6 +24,10 @@
   },
   "homepage": "https://github.com/silkyjazz/react-flashcards#readme",
   "dependencies": {
-    "concurrently": "^7.6.0"
+    "@fortawesome/free-brands-svg-icons": "^6.3.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "bootstrap": "^5.2.3",
+    "concurrently": "^7.6.0",
+    "react-bootstrap": "^2.7.2"
   }
 }
