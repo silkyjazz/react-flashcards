@@ -24,8 +24,6 @@ const AppNavbar = () => {
             <Button variant="secondary" onClick={handleShow} style={{ backgroundColor: '#3F497F' }} className="btn">
               Log In
             </Button>
-
-            {/* <Nav.Link className="links" href="#login">Log In</Nav.Link> */}
             <Button variant="secondary" onClick={handleShow} style={{ backgroundColor: '#3F497F' }}  className="btn">
               Sign Up
             </Button>
