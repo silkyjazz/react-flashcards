@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Tab, Button } from "react-bootstrap";
 import logo from "../images/logo-yellow.png";
-// import SignUpForm from './SignupForm';
+import SignUpForm from './SignupForm';
 // import LoginForm from './LoginForm';
 // import Auth from '../utils/auth';
 
@@ -35,14 +35,23 @@ const AppNavbar = () => {
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
         <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
+      </Modal>
+
+      <Modal show={show} onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title  id='signup-modal'>Create an account</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <SignUpForm handleModalClose={() => setShow(false)} />
+        </Modal.Body>
+        {/* <Modal.Footer>
           <Button  variant="secondary" onClick={handleClose}>
             Close
           </Button>
           <Button  variant="secondary" onClick={handleClose}>
-            Save Changes
+            Sign Up
           </Button>
-        </Modal.Footer>
+        </Modal.Footer> */}
       </Modal>
     </>
   );
