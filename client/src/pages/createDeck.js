@@ -4,10 +4,8 @@ import { useMutation, useQuery } from '@apollo/client'
 import { QUERY_DECK } from '../utils/query'
 import { CREATE_DECK } from '../utils/mutation'
 
-const createDeck = () => {
+const Deck = () => {
     const { loading, data } = useQuery(QUERY_DECK)
-
-    const deck = data?.deck || []
 
     const [formData, setFormData] = useState({
         _id: '',
@@ -26,7 +24,7 @@ const createDeck = () => {
                 variables: { ...formData }
             })
 
-            navigate(`/deck/${data.makeDeck._id}`)
+            navigate(`/create/${data.makeDeck._id}`)
         } catch (err) {
             console.log(err)
         }
@@ -48,7 +46,53 @@ const createDeck = () => {
                     <div>Loading...</div>
                 ) : (
                     <form onSubmit={handleFormSubmit}>
-                        <button>Create new Deck</button>
+                        <div className=''>
+                            <label>Deck Name</label>
+                            <input type="text" name="name" />
+                        </div>
+                        <div>
+                            <label>Question 1</label>
+                            <input type="text" name="question1" />
+                        </div>
+                        <div>
+                            <label>Question 2</label>
+                            <input type="text" name="question2" />
+                        </div>
+                        <div>
+                            <label>Question 3</label>
+                            <input type="text" name="question3" />
+                        </div>
+                        <div>
+                            <label>Question 4</label>
+                            <input type="text" name="question4" />
+                        </div>
+                        <div>
+                            <label>Question 5</label>
+                            <input type="text" name="question5" />
+                        </div>
+                        <div>
+                            <label>Question 6</label>
+                            <input type="text" name="question6" />
+                        </div>
+                        <div>
+                            <label>Question 7</label>
+                            <input type="text" name="question7" />
+                        </div>
+                        <div>
+                            <label>Question 8</label>
+                            <input type="text" name="question8" />
+                        </div>
+                        <div>
+                            <label>Question 9</label>
+                            <input type="text" name="question9" />
+                        </div>
+                        <div>
+                            <label>Question 10</label>
+                            <input type="text" name="question10" />
+                        </div>
+                        <button className='btn' type='submit'>
+                            Create new Deck
+                        </button>
                     </form>
                 )}
             </div>
@@ -57,4 +101,4 @@ const createDeck = () => {
     )
 }
 
-export default createDeck
+export default Deck
