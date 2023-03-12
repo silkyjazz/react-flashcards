@@ -24,7 +24,7 @@ const Deck = () => {
                 variables: { ...formData }
             })
 
-            navigate(`/create/${data.makeDeck._id}`)
+            navigate(`/:${data.user._id}/decks`)
         } catch (err) {
             console.log(err)
         }
