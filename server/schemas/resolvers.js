@@ -96,7 +96,7 @@ const resolvers = {
         { new: true }
       );
 
-      console.log(updateUser)
+      console.log(updateUser);
       return deck;
     },
 
@@ -109,14 +109,10 @@ const resolvers = {
       );
       // find the card and delete it
       return Card.findOneAndDelete({ _id: cardId });
-
-      throw new AuthenticationError("Couldn't find a deck with this id!");
     },
 
     createUser: async (parent, { username, email, password }) => {
-      const user = await User.create(
-        { username, email, password }
-      );
+      const user = await User.create({ username, email, password });
       // const token = signToken(user);
       // return { token, user };
       console.log("successfully created " + user);
@@ -129,13 +125,10 @@ const resolvers = {
       if (!user) {
         throw new AuthenticationError("No user found with this email address");
       }
-
       const correctPw = await user.isCorrectPassword(password);
-
       if (!correctPw) {
         throw new AuthenticationError("Incorrect credentials");
       }
-
       const token = signToken(user);
 
       return { token, user };
