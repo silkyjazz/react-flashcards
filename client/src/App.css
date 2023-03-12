@@ -1,38 +1,64 @@
-.App {
-  text-align: center;
-}
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Passion+One&family=Syne:wght@700&family=Ubuntu:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Serif+Malayalam&display=swap');
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+* {
+    /* background-color: #3F497F; */
+    /* background-color:rgba(248, 245, 228); */
+    color: #3F497F;
+    font-family: 'Noto Serif Malayalam', serif;
+}
+body{
+    background-color: #F8F5E4 !important;
+}
+#title {
+    color:   #3F497F;
+    font-family: 'Bungee', cursive;
+    font-size: 35px;
+}
+/* #navbar{
+    background-color: #F8F5E4;
+} */
+.navbar-logo {
+    height: 80px;
+    margin-right: 10px;
+    max-width: 100%;
+}
+.btn {
+    margin-right: 10px;
+    background: #3F497F;
   }
+.heading{
+    font-family: 'Bebas Neue', cursive;
+    font-size: 75px;
+    display: flex;
+    justify-content: center;
+     color:   #F8F5E4;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.landing-container{
+    /* background-color: rgba(63, 73, 127, 0.8); */
+    background-size: 100% auto;
+    background:  rgba(0, 0, 0, 1) url('./images/landing-image-full.png') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    /* background-size: cover; */
+    padding: 130px;
+    /* color:   #F8F5E4; */
 }
-
-.App-link {
-  color: #61dafb;
+/* .landing-top{
+    /* background-color: #3F497F;
+    padding: 50px 0;  
+} */
+.landing-middle{
+    /* background-color: #F8F5E4; */
+    padding: 50px 0; 
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.landing-images{
+    width: 70%;
+    height: auto;
+}
+.landing-text{
+    color:   #F8F5E4;
 }
