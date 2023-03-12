@@ -2,64 +2,62 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Serif+Malayalam&display=swap');
 
+
+:root{
+    --primary-color: #3F497F;
+    --secondary-color: #F8F5E4;
+    --tertiary: #F7C04A;
+    --font-size: 16px;
+}
 * {
-    /* background-color: #3F497F; */
-    /* background-color:rgba(248, 245, 228); */
-    color: #3F497F;
+    color: var(--secondary-color);
     font-family: 'Noto Serif Malayalam', serif;
 }
 body{
-    background-color: #F8F5E4 !important;
+    background-color: var(--primary-color) !important;
+    overflow-x: hidden;
 }
 #title {
-    color:   #3F497F;
+    color: var(--secondary-color);
     font-family: 'Bungee', cursive;
     font-size: 35px;
 }
-/* #navbar{
-    background-color: #F8F5E4;
-} */
+
 .navbar-logo {
     height: 80px;
-    margin-right: 10px;
     max-width: 100%;
 }
 .btn {
     margin-right: 10px;
-    background: #3F497F;
+    background: var(--tertiary);
   }
 .heading{
     font-family: 'Bebas Neue', cursive;
     font-size: 75px;
     display: flex;
     justify-content: center;
-     color:   #F8F5E4;
+    color: var(--secondary-color);
 }
 .landing-container{
-    /* background-color: rgba(63, 73, 127, 0.8); */
     background-size: 100% auto;
-    background:  rgba(0, 0, 0, 1) url('./images/landing-image-full.png') no-repeat center center;
+    background: url('./images/landing-image-full.png') no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    /* background-size: cover; */
     padding: 130px;
-    /* color:   #F8F5E4; */
 }
-/* .landing-top{
-    /* background-color: #3F497F;
-    padding: 50px 0;  
-} */
+
 .landing-middle{
-    /* background-color: #F8F5E4; */
-    padding: 50px 0; 
+    padding: 5%; 
 }
+
 .landing-images{
-    width: 70%;
+    width: 100%;
     height: auto;
+    object-fit: contain;
 }
 .landing-text{
-    color:   #F8F5E4;
+    color: var(--secondary-color);
 }
 
 .signup-btn{
