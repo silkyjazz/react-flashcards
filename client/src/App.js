@@ -1,9 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
-// import { Home, createDeck, decks, study, cards } from './pages'
-import Home from './pages/Home.js'
+import Home from './pages/home.js'
 import Navbar from './components/NavBar';
 import Footer from './components/Footer';
 
