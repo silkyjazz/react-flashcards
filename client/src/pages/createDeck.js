@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client'
 import { QUERY_DECK } from '../utils/query'
 import { CREATE_DECK } from '../utils/mutation'
+import { Card, Modal, Button, Row, Col } from "react-bootstrap";
+
 
 const Deck = () => {
     // const { loading, data } = useQuery(QUERY_DECK)
@@ -35,6 +37,11 @@ const Deck = () => {
     //         name: ''
     //     })
     // }
+
+    const create = (event) => {
+        event.preventDefault();
+        window.location.assign("/decks");
+    };
 
     return (
         <div className='container'>
@@ -96,6 +103,9 @@ const Deck = () => {
                         </button>
                     </form>
                 )} */}
+                   <Button variant="secondary" onClick={create}>
+            Create Deck
+          </Button>
             </div>
             // {/* {error && <div>Somthing went wrong...</div>} */}
         // </div>
