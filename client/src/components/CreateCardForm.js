@@ -62,12 +62,12 @@ const CreateCardForm = () => {
 
             <>
                 <Form.Group className="mb-3" controlId="cardQ">
-                    <Form.Label htmlFor="question">Question</Form.Label>        
+                    <Form.Label className='modal-text text-center' htmlFor="question">Question</Form.Label>        
                     <Form.Control as="textarea" rows={1} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="cardA">
-                    <Form.Label htmlFor="answer">Answer</Form.Label>        
+                    <Form.Label className='modal-text text-center' htmlFor="answer">Answer</Form.Label>        
                     <Form.Control as="textarea" rows={2} />
                 </Form.Group>
       

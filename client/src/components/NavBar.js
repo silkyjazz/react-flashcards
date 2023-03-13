@@ -33,8 +33,10 @@ const AppNavbar = () => {
         <Container>
           <Navbar.Brand href="/" id="title">
             <img className="navbar-logo" src={logo} alt="logo" />
-            STUDY.io
+            STUDY.io 
+             {/* {'\n'}  <h6 className="justify-content-center">...in a flash</h6> */}
           </Navbar.Brand>
+         
 
           <Nav className="ml-auto">
 
@@ -65,7 +67,7 @@ const AppNavbar = () => {
       </Navbar>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title id="login-modal">Log In</Modal.Title>
+          <Modal.Title className="modal-text" id="login-modal">Log In</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <LoginForm handleModalClose={() => setShow(false)} />
@@ -73,7 +75,7 @@ const AppNavbar = () => {
       </Modal>
       <Modal show={showLogin} onHide={handleCloseLogin}>
         <Modal.Header closeButton>
-          <Modal.Title id="signup-modal">Create an Account</Modal.Title>
+          <Modal.Title className="modal-text"  id="signup-modal">Create an Account</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <SignUpForm handleModalClose={() => setShowLogin(false)} />

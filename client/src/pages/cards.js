@@ -104,33 +104,41 @@ function CardWithModal() {
   return (
     <>
       <h3 className="deck-title text-center">Study Cards</h3>
-      <Row md={3} lg={6} className="g-4">
-        <Card
-          className="text-center"
-          onClick={handleCardClick}
-          style={{ width: "25rem" }}
-        >
-          <Card.Body>
-            <Card.Text>+ Create New Card</Card.Text>
-          </Card.Body>
-        </Card>
-
-        <Card
-          className="text-center"
-          onClick={study}
-          style={{ width: "25rem" }}
-        >
-          <Card.Body>
-            <Card.Text>Study</Card.Text>
-          </Card.Body>
-        </Card>
+      <Row className="g-4">
+        <Col md={{ span: 0 }}>
+          <Card
+            className="text-center"
+            onClick={handleCardClick}
+            style={{ width: "25rem" }}
+          >
+            <Card.Body>
+              <Card.Text>+ Create New Card</Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={{ span: 3, offset: 3 }}>
+          <Card
+            className="text-center"
+            onClick={study}
+            style={{ width: "25rem" }}
+          >
+            <Card.Body>
+              <Card.Text>Study</Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
       </Row>
-      <Modal show={showModal} onHide={handleModalClose}>
+      <Modal
+        show={showModal}
+        onHide={handleModalClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
         <Modal.Header closeButton>
-          <Modal.Title class="flashcard-text">Create New Card</Modal.Title>
+          <Modal.Title className="modal-text ">Create New Card</Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
+        <Modal.Body id="contained-modal-title-vcenter">
           <CreateCardForm />
         </Modal.Body>
 
