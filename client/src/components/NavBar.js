@@ -65,7 +65,8 @@ const AppNavbar = () => {
 
         </Container>
       </Navbar>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose}    aria-labelledby="contained-modal-title-vcenter"
+        centered>
         <Modal.Header closeButton>
           <Modal.Title className="modal-text" id="login-modal">Log In</Modal.Title>
         </Modal.Header>
@@ -73,7 +74,8 @@ const AppNavbar = () => {
           <LoginForm handleModalClose={() => setShow(false)} />
         </Modal.Body>
       </Modal>
-      <Modal show={showLogin} onHide={handleCloseLogin}>
+      <Modal show={showLogin} onHide={handleCloseLogin}    aria-labelledby="contained-modal-title-vcenter"
+        centered>
         <Modal.Header closeButton>
           <Modal.Title className="modal-text"  id="signup-modal">Create an Account</Modal.Title>
         </Modal.Header>
