@@ -27,6 +27,11 @@ body{
     height: 80px;
     max-width: 100%;
 }
+
+.study-logo {
+    height: 25px;
+    max-width: 100%;
+}
 .btn {
     margin-right: 10px;
     background: var(--tertiary);
@@ -74,6 +79,13 @@ body{
 .flashcard-text{
     color: var(--primary-color);
     margin-top: 25%;
+    display: flex;
+    justify-content: center;
+}
+
+.card-page-text{
+    color: var(--primary-color);
+   
     display: flex;
     justify-content: center;
 }

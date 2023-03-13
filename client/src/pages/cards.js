@@ -71,6 +71,8 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 
 import { QUERY_DECK } from "../utils/query";
+import logo from "../images/logo-yellow.png";
+
 
 import CardList from "../components/CardList";
 
@@ -112,7 +114,7 @@ function CardWithModal() {
             style={{ width: "25rem" }}
           >
             <Card.Body>
-              <Card.Text>+ Create New Card</Card.Text>
+              <Card.Text className="card-page-text">+ Create New Card</Card.Text>
             </Card.Body>
           </Card>
         </Col>
@@ -123,7 +125,8 @@ function CardWithModal() {
             style={{ width: "25rem" }}
           >
             <Card.Body>
-              <Card.Text>Study</Card.Text>
+              <Card.Text className="card-page-text">     <img className="study-logo" src={logo} alt="logo" /> 
+              Study</Card.Text>
             </Card.Body>
           </Card>
         </Col>

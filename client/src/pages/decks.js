@@ -35,7 +35,7 @@ const Decks = () => {
             <Link to="/create">
         <Card className="text-center" style={{ width: '25rem' }}>
           <Card.Body>
-            <Card.Text>+ Create NewDeck</Card.Text>
+            <Card.Text className="card-page-text">+ Create NewDeck</Card.Text>
           </Card.Body>
         </Card>
         </Link>
