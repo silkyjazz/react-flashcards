@@ -14,4 +14,4 @@ const Decks = () => {
             );
 };
 
-export default decks;
+export default Decks;

@@ -11,7 +11,7 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  introspection: true,
+  // introspection: true,
   context: authMiddleware,
 });
 
@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
 
 
 // Create a new instance of an Apollo server with the GraphQL schema
-const startApolloServer = async () => {
+const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
   server.applyMiddleware({ app });
   
