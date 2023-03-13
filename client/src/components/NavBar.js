@@ -3,14 +3,18 @@ import React, { useState } from "react";
 import { Navbar, Nav, Container, Modal, Button } from "react-bootstrap";
 import logo from "../images/logo-yellow.png";
 import SignUpForm from './SignupForm';
-// import LoginForm from './LoginForm';
+import LoginForm from './LoginForm';
 // import Auth from '../utils/auth';
 
 const AppNavbar = () => {
   const [show, setShow] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleCloseLogin = () => setShowLogin(false);
+  const handleShowLogin = () => setShowLogin(true);
 
   return (
     <>
@@ -24,7 +28,7 @@ const AppNavbar = () => {
             <Button variant="secondary" onClick={handleShow} style={{ backgroundColor: '#F7C04A' }} className="btn">
               Log In
             </Button>
-            <Button variant="secondary" onClick={handleShow} style={{ backgroundColor: '#F7C04A' }}  className="btn">
+            <Button variant="secondary" onClick={handleShowLogin} style={{ backgroundColor: '#3F497F' }}  className="btn">
               Sign Up
             </Button>
           </Nav>
@@ -32,21 +36,44 @@ const AppNavbar = () => {
       </Navbar>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-      </Modal>
-
-      <Modal show={show} onHide={() => setShow(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title  id='signup-modal'>Create an account</Modal.Title>
+          <Modal.Title id="login-modal">Log In</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <SignUpForm handleModalClose={() => setShow(false)} />
+          <LoginForm handleModalClose={() => setShow(false)} />
+        </Modal.Body>
+      </Modal>
+      <Modal show={showLogin} onHide={handleCloseLogin}>
+        <Modal.Header closeButton>
+          <Modal.Title id="signup-modal">Create an Account</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <SignUpForm handleModalClose={() => setShowLogin(false)} />
         </Modal.Body>
       </Modal>
     </>
   );
 };
 
+
 export default AppNavbar;
+
+
+{/* <Modal show={show} onHide={handleClose}>
+<Modal.Header closeButton>
+  
+  <Modal.Title id="signup-modal">Create an Account</Modal.Title>
+
+</Modal.Header> */}
+{/* <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+<Modal.Footer>
+  <Button  variant="secondary" onClick={handleClose}>
+    Close
+  </Button>
+  <Button  variant="secondary" onClick={handleClose}>
+    Save Changes
+  </Button> */}
+{/* </Modal.Footer> */}
+{/* <Modal.Body>
+  <SignUpForm handleModalClose={() => setShow(false)}/>
+</Modal.Body>
+</Modal> */}

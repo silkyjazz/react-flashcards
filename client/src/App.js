@@ -15,6 +15,9 @@ import Home from './pages/home.js'
 import Navbar from './components/NavBar';
 import Footer from './components/Footer';
 import Study from './pages/study';
+import Cards from './pages/cards';
+import Decks from './pages/decks'
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -51,6 +54,13 @@ function App() {
           <Route exact path='/:userId/createDeck' component={createDeck} />
      
           <Route exact path='/:deckId/cards' component={cards} /> */}
+
+          <Route exact path='/' element={<Home/>} />
+          <Route exact path={`/${user._id}/decks`} component={<Decks/>} />
+          {/* <Route exact path='/:userId/createDeck' component={createDeck} />
+          <Route exact path='/:deckId/study' component={study} /> */}
+          <Route exact path='/:deckId/cards' component={<Cards/>} />
+
           <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
         </Routes>
         <Footer />

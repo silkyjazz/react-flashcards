@@ -31,9 +31,9 @@ class AuthService {
   }
 
   // Saves user token to localStorage
-  login(idToken) {
-    localStorage.setItem("id_token", idToken);
-    window.location.assign("/");
+  login(token) {
+    localStorage.setItem("id_token", token);
+    window.location.assign("/:userId/decks");
   }
 
   logout() {
