@@ -1,114 +1,177 @@
-import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import { QUERY_USER } from "../utils/query";
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button';
-import Auth from '../utils/auth';
-import CardList from '../components/CardList';
+// import React from 'react';
+// import { useParams } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
-const CardPage = () => {
-    // const { username: userParam } = useParams();
+// import { useQuery } from '@apollo/client';
 
-//   const { loading, data } = useQuery(QUERY_CARDS);
+// import { QUERY_DECK } from "../utils/query";
+// import Card from 'react-bootstrap/Card'
+// import Button from 'react-bootstrap/Button';
 
-//   const cardList = data?.card || [];         
-    
+// import CardList from '../components/CardList';
 
-    return (
-<div>
-    <div>
-        <h3>${deckId} study cards!</h3>
-    </div>
+// const CardPage = () => {
+//     const { deckId } = useParams();
 
-        <div>
-        <Link to={{pathname: "createCardModal", state: {modal: true},}} className="link">
-        <Card className="text-center">
-            <Card.Body>
-                <Card.Text>+ Create New card</Card.Text>
-            </Card.Body>
-        </Card>
-    </Link>
-
-<div>
-<CardList/>
-</div>
-
-    </div>
-    </div>
-
-    );
-};
-
-export default CardPage;
-
-
-//   const [formData, setFormData] = useState({
-//     _id: "",
-//     question: "",
-//     answer: "",
-//     createdAt: "",
-//   });
-
-//   let navigate = useNavigate();
-
-//   const [deleteCard, { error }] = useMutation(DELETE_CARD);
-
-//   const [updateCard, { error }] = useMutation(UPDATE_CARD);
-
-//   const [createCard, { error }] = useMutation(CREATE_CARD)
-
-//   const handleDeleteSubmit = async (e) => {
-//     e.preventDefault();
-
-//     try {
-//       const { data } = await deleteCard({
-//         variables: { ...formData },
-//       });
-
-//       cardList.filter(data.card._id);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-
-//   const handleCreateSubmit = async (e) => {
-//         e.preventDefault()
-
-//         try {
-//             const { data } = await createCard({
-//                 variables: { ...formData }
-//             })
-
-//             navigate(`/:${data.username._id}/createCard`)
-//         } catch (err) {
-//             console.log(err)
-//         }
-//     }
-
-//   const handleUpdateSubmit = async (e) => {
-//     e.preventDefault();
-
-//     try {
-//       const { data } = await updateCard({
-//         variables: { ...formData },
-//       });
-
-//       navigate(`/${data.deck._id}/cards`);
-//     } catch (err) {
-//       console.log(err);
-//     }
-
-    
-
-//     setFormData({
-//       _id: "",
-//       username: "",
-//       name: "",
-//       cards: {
-//         question: "",
-//         answer: "",
-//       },
+//     const { loading, data } = useQuery(QUERY_DECK, {
+//       // pass URL parameter
+//       variables: { deckId: deckId },
 //     });
-//   };
-            
+
+//     const findAllDecks = data?.findAllDecks || {};
+
+//     if (loading) {
+//       return <div>Loading...</div>;
+//     }
+//     return (
+// <div>
+//     <div>
+//         <h3>Study cards!</h3>
+//     </div>
+
+//         <div>
+//         <Link to={{pathname: "createCardModal", state: {modal: true},}} className="link">
+//         <Card className="text-center">
+//             <Card.Body>
+//                 <Card.Text>+ Create New card</Card.Text>
+//             </Card.Body>
+//         </Card>
+//     </Link>
+
+//     <Modal.Dialog>
+//         <Modal.Header closeButton>
+//           <Modal.Title>The correct answer is</Modal.Title>
+//         </Modal.Header>
+
+//         <Modal.Body>
+//       <CreateCardForm/>
+//         </Modal.Body>
+
+//         <Modal.Footer>
+//           <Button variant="secondary">Close</Button>
+//           <Button variant="primary">Save changes</Button>
+//         </Modal.Footer>
+//       </Modal.Dialog>
+// {/*
+// <div>
+// <CardList/>
+// </div> */}
+
+//     </div>
+//     </div>
+
+//     );
+// };
+
+// export default CardPage;
+
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+
+import { useQuery } from "@apollo/client";
+
+import { QUERY_DECK } from "../utils/query";
+import logo from "../images/logo-yellow.png";
+
+
+import CardList from "../components/CardList";
+
+import { Link } from "react-router-dom";
+import { Card, Modal, Button, Row, Col } from "react-bootstrap";
+import CreateCardForm from "../components/CreateCardForm";
+
+function CardWithModal() {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleModalClose = () => setShowModal(false);
+  const handleCardClick = () => setShowModal(true);
+
+  const study = (event) => {
+    event.preventDefault();
+    window.location.assign("/study");
+  };
+  //   const { deckId } = useParams();
+
+  //   const { loading, data } = useQuery(QUERY_DECK, {
+  //     // pass URL parameter
+  //     variables: { deckId: deckId },
+  //   });
+
+  //   const findAllDecks = data?.findAllDecks || {};
+
+  //   if (loading) {
+  //     return <div>Loading...</div>;
+  //   }
+
+  return (
+    <>
+      <h3 className="deck-title text-center">Study Cards</h3>
+      <Row className="g-4">
+        <Col md={{ span: 0 }}>
+          <Card
+            className="text-center"
+            onClick={handleCardClick}
+            style={{ width: "25rem" }}
+          >
+            <Card.Body>
+              <Card.Text className="card-page-text">+ Create New Card</Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col md={{ span: 3, offset: 3 }}>
+          <Card
+            className="text-center"
+            onClick={study}
+            style={{ width: "25rem" }}
+          >
+            <Card.Body>
+              <Card.Text className="card-page-text">     <img className="study-logo" src={logo} alt="logo" /> 
+              Study</Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+      <Modal
+        show={showModal}
+        onHide={handleModalClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title className="modal-text ">Create New Card</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body id="contained-modal-title-vcenter">
+          <CreateCardForm />
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleModalClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleModalClose}>
+            Save changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Row xs={1} md={4} className="g-4">
+        {Array.from({ length: 4 }).map((_, idx) => (
+          <Col>
+            {/* <Card className="text-center" onClick={handleCardClick} style={{ width: '25rem' }}> */}
+
+            <Card className="text-center" style={{ width: "25rem" }}>
+              <Card.Body>
+                {/* <Card.Text class="flashcard-text">Question: {'\n'} {userParams ?` ${findAllDecks.question}`: ""} </Card.Text> */}
+
+                <Card.Text class="flashcard-text">Questions </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </>
+  );
+}
+
+export default CardWithModal;

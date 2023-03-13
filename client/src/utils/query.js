@@ -58,3 +58,5 @@ export const QUERY_CARD = gql`
   }
 `;
 
+
+

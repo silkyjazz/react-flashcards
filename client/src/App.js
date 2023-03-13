@@ -2,7 +2,7 @@
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   ApolloClient,
   InMemoryCache,
@@ -17,6 +17,7 @@ import Footer from './components/Footer';
 import Study from './pages/study';
 import Cards from './pages/cards';
 import Decks from './pages/decks'
+import Create from './pages/createDeck'
 
 
 const httpLink = createHttpLink({
@@ -26,6 +27,7 @@ const httpLink = createHttpLink({
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
   const token = localStorage.getItem('id_token');
+
   // return the headers to the context so httpLink can read them
   return {
     headers: {
@@ -35,13 +37,17 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+
+
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
 
+
 function App() {
+
   return (
     <ApolloProvider client={client}>
     <Router>
@@ -50,17 +56,18 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Home/>} />     
           <Route exact path='/study' element={<Study/>} />
-          {/* <Route exact path='/:userId/decks' component={decks} />
-          <Route exact path='/:userId/createDeck' component={createDeck} />
+          <Route  path="/cards" element={<Cards/>} />
+
+          <Route  path="/decks" element={<Decks/>} />
+          {/* <Route exact path='/:userId/createDeck' component={createDeck} />
      
           <Route exact path='/:deckId/cards' component={cards} /> */}
 
           <Route exact path='/' element={<Home/>} />
-          <Route exact path={`/${user._id}/decks`} component={<Decks/>} />
-          {/* <Route exact path='/:userId/createDeck' component={createDeck} />
-          <Route exact path='/:deckId/study' component={study} /> */}
-          <Route exact path='/:deckId/cards' component={<Cards/>} />
-
+          {/* <Route  path={`/${window.login.user.username}/decks`} component={<Decks/>} /> */}
+          <Route path='/create' element={<Create/>} />
+          <Route exact path='/study' element={<Study/>} />
+          {/* <Route exact path='/:deckId/cards' component={<Cards/>} /> */}
           <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
         </Routes>
         <Footer />

@@ -3,49 +3,57 @@ import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery } from '@apollo/client'
 import { QUERY_DECK } from '../utils/query'
 import { CREATE_DECK } from '../utils/mutation'
+import { Card, Modal, Button, Row, Col } from "react-bootstrap";
+
 
 const Deck = () => {
-    const { loading, data } = useQuery(QUERY_DECK)
+    // const { loading, data } = useQuery(QUERY_DECK)
 
-    const [formData, setFormData] = useState({
-        _id: '',
-        usernameId: '',
-        name: ''
-    })
-    let navigate = useNavigate()
+    // const [formData, setFormData] = useState({
+    //     _id: '',
+    //     usernameId: '',
+    //     name: ''
+    // })
+    // let navigate = useNavigate()
 
-    const [makeDeck, { error }] = useMutation(CREATE_DECK);
+    // const [makeDeck, { error }] = useMutation(CREATE_DECK);
 
-    const handleFormSubmit = async (event) => {
-        event.preventDefault()
+    // const handleFormSubmit = async (event) => {
+    //     event.preventDefault()
 
-        try {
-            const { data } = await makeDeck({
-                variables: { ...formData }
-            })
+    //     try {
+    //         const { data } = await makeDeck({
+    //             variables: { ...formData }
+    //         })
 
-            navigate(`/create/${data.makeDeck._id}`)
-        } catch (err) {
-            console.log(err)
-        }
+    //         navigate(`/create`)
+    //     } catch (err) {
+    //         console.log(err)
+    //     }
 
-        setFormData({
-            _id: '',
-            usernameId: '',
-            name: ''
-        })
-    }
+    //     setFormData({
+    //         _id: '',
+    //         usernameId: '',
+    //         name: ''
+    //     })
+    // }
+
+    const create = (event) => {
+        event.preventDefault();
+        window.location.assign("/decks");
+    };
 
     return (
         <div className='container'>
-            <div className='deck-title'>
-                <h1>Decks</h1>
+            <div className='deck-title text-center'>
+                <h1>Create a New Deck</h1>
             </div>
-            <div className='deck-body'>
-                {loading ? (
-                    <div>Loading...</div>
+            {/* <div className='deck-body'> */}
+                {/* {loading ? ( */}
+                    {/* <div>Loading...</div>
                 ) : (
-                    <form onSubmit={handleFormSubmit}>
+                    // <form onSubmit={handleFormSubmit}>
+                    <form>
                         <div className=''>
                             <label>Deck Name</label>
                             <input type="text" name="name" />
@@ -94,11 +102,14 @@ const Deck = () => {
                             Create new Deck
                         </button>
                     </form>
-                )}
+                )} */}
+                   <Button variant="secondary" onClick={create}>
+            Create Deck
+          </Button>
             </div>
-            {error && <div>Somthing went wrong...</div>}
-        </div>
+            // {/* {error && <div>Somthing went wrong...</div>} */}
+        // </div>
     )
 }
 
-export default Deck
+export default Deck;

@@ -49,7 +49,7 @@ const [login, {error}] = useMutation(LOGIN_USER);
       const { data } = await login({
 
         // variables: { ...formState }
-        variables: formState
+        variables: { ...formState}
 
       })
 
@@ -78,7 +78,7 @@ const [login, {error}] = useMutation(LOGIN_USER);
           Something went wrong with your login credentials!
         </Alert>
         <Form.Group>
-          <Form.Label htmlFor='email'>Email</Form.Label>
+          <Form.Label className="modal-text" htmlFor='email'>Email</Form.Label>
           <Form.Control
             type='text'
             placeholder='Your email'
@@ -87,11 +87,11 @@ const [login, {error}] = useMutation(LOGIN_USER);
             value={formState.email}
             required
           />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+          <Form.Control.Feedback  type='invalid'>Email is required!</Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group>
-          <Form.Label htmlFor='password'>Password</Form.Label>
+          <Form.Label className="modal-text" htmlFor='password'>Password</Form.Label>
           <Form.Control
             type='password'
             placeholder='Your password'

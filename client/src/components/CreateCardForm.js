@@ -5,66 +5,69 @@ import { useMutation } from '@apollo/client';
 import { QUERY_CARDS, QUERY_DECK } from "../utils/query";
 import { DELETE_CARD, UPDATE_CARD, CREATE_CARD } from "../utils/mutation";
 
-import Auth from '../../utils/auth';
+import { Card, Modal, Button, Form } from "react-bootstrap";
+
+
+// import Auth from '../../utils/auth';
 
 const CreateCardForm = () => {
-    const [username, setUsername] = useState({
-            _id: "",
-            question: "",
-            answer: "",
-            // createdAt: "",
-          });
+    // const [username, setUsername] = useState({
+    //         _id: "",
+    //         question: "",
+    //         answer: "",
+          //   // createdAt: "",
+          // });
 
-            const [createCard, { error }] = useMutation(CREATE_CARD, {
-                update(cache, { data: { createCard } }) {
-                  try {
-                    const { cards } = cache.readQuery({ query: QUERY_CARDS });
+          //   const [createCard, { error }] = useMutation(CREATE_CARD, {
+          //       update(cache, { data: { createCard } }) {
+          //         try {
+          //           const { cards } = cache.readQuery({ query: QUERY_CARDS });
             
-                    cache.writeQuery({
-                      query: QUERY_CARDS,
-                      data: { cards: [createCard, ...cards] },
-                    });
-                  } catch (e) {
-                    console.error(e);
-                  }
+          //           cache.writeQuery({
+          //             query: QUERY_CARDS,
+          //             data: { cards: [createCard, ...cards] },
+          //           });
+          //         } catch (e) {
+          //           console.error(e);
+          //         }
             
-                  const { deck } = cache.readQuery({ query: QUERY_DECK });
-                  cache.writeQuery({
-                    query: QUERY_DECK,
-                    data: { deck: { ...deck, cards: [...deck.cards, createCard] } },
-                  });
-                },
-              });
+          //         const { deck } = cache.readQuery({ query: QUERY_DECK });
+          //         cache.writeQuery({
+          //           query: QUERY_DECK,
+          //           data: { deck: { ...deck, cards: [...deck.cards, createCard] } },
+          //         });
+          //       },
+          //     });
               
 
-              const handleFormSubmit = async (event) => {
-                event.preventDefault();
+          //     const handleFormSubmit = async (event) => {
+          //       event.preventDefault();
             
-                try {
-                  const { data } = await createCard({
-                    // variables: {
-                    //   question,
-                    //   thoughtAuthor: Auth.getProfile().data.username,
-                    // },
-                  });
+          //       try {
+          //         const { data } = await createCard({
+          //           // variables: {
+          //           //   question,
+          //           //   thoughtAuthor: Auth.getProfile().data.username,
+          //           // },
+          //         });
             
-                  setUsername('');
-                } catch (err) {
-                  console.error(err);
-                }
-              };
+          //         setUsername('');
+          //       } catch (err) {
+          //         console.error(err);
+          //       }
+          //     };
 
     return (
         <div>
 
             <>
                 <Form.Group className="mb-3" controlId="cardQ">
-                    <Form.Label htmlFor="question">Question</Form.Label>        
+                    <Form.Label className='modal-text text-center' htmlFor="question">Question</Form.Label>        
                     <Form.Control as="textarea" rows={1} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="cardA">
-                    <Form.Label htmlFor="answer">Answer</Form.Label>        
+                    <Form.Label className='modal-text text-center' htmlFor="answer">Answer</Form.Label>        
                     <Form.Control as="textarea" rows={2} />
                 </Form.Group>
       
