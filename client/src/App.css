@@ -65,3 +65,15 @@ body{
     justify-content: center;
     align-items: center;
 }
+.flashcard-container {
+    height: 500px; 
+}
+.flashcard{
+    height: 300px;
+}
+.flashcard-text{
+    color: var(--primary-color);
+    margin-top: 25%;
+    display: flex;
+    justify-content: center;
+}
