@@ -22,6 +22,11 @@ const AppNavbar = () => {
     Auth.logout();
   };
 
+  const decks = (event) => {
+    event.preventDefault();
+    window.location.assign("/decks");
+  };
+
   return (
     <>
       <Navbar id="navbar">
@@ -38,6 +43,9 @@ const AppNavbar = () => {
            <>
           <Button variant="secondary" onClick={logout} style={{ backgroundColor: '#F7C04A' }} className="btn">
               Logout
+            </Button>
+            <Button variant="secondary" onClick={decks} style={{ backgroundColor: '#F7C04A' }} className="btn">
+              Decks
             </Button>
             </>
           ) : (
