@@ -38,8 +38,8 @@ class AuthService {
   // Saves user token to localStorage
   login(idToken) {
     localStorage.setItem("id_token", idToken);
-    // window.location.assign(`/${findUser.id}/decks`);
-    window.location.assign("/:userId/decks");
+    // window.location.assign(`/decks`);
+    window.location.assign("/decks");
 
   }
 

@@ -55,13 +55,15 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Home/>} />     
           <Route exact path='/study' element={<Study/>} />
-          {/* <Route exact path='/:userId/decks' component={decks} />
-          <Route exact path='/:userId/createDeck' component={createDeck} />
+          {/* <Route  path="/:username/decks" element={<Decks/>} /> */}
+
+          <Route  path="/decks" element={<Decks/>} />
+          {/* <Route exact path='/:userId/createDeck' component={createDeck} />
      
           <Route exact path='/:deckId/cards' component={cards} /> */}
 
           <Route exact path='/' element={<Home/>} />
-          {/* <Route exact path={`/${userSchema.username}/decks`} component={<Decks/>} /> */}
+          {/* <Route  path={`/${window.login.user.username}/decks`} component={<Decks/>} /> */}
           {/* <Route exact path='/:userId/createDeck' component={createDeck} />
           <Route exact path='/:deckId/study' component={study} /> */}
           {/* <Route exact path='/:deckId/cards' component={<Cards/>} /> */}

@@ -49,7 +49,7 @@ const [login, {error}] = useMutation(LOGIN_USER);
       const { data } = await login({
 
         // variables: { ...formState }
-        variables: formState
+        variables: { ...formState}
 
       })
 
