@@ -19,7 +19,7 @@ export const QUERY_USER = gql`
 `;
 
 export const QUERY_DECKS = gql`
-  query Query($username: String!) {
+  query findAllDecks($username: String!) {
     findAllDecks(username: $username) {
       _id
       username
