@@ -1,20 +1,26 @@
 import React, { useState } from "react";
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Button } from "react-bootstrap";
 import logo from "../images/logo-yellow.png";
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
-// import Auth from '../utils/auth';
+import Auth from '../utils/auth';
 
 const AppNavbar = () => {
   const [show, setShow] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleCloseLogin = () => setShowLogin(false);
   const handleShowLogin = () => setShowLogin(true);
+
+  const logout = (event) => {
+    event.preventDefault();
+    Auth.logout();
+  };
 
   return (
     <>
@@ -24,14 +30,29 @@ const AppNavbar = () => {
             <img className="navbar-logo" src={logo} alt="logo" />
             STUDY.io
           </Navbar.Brand>
+
           <Nav className="ml-auto">
+
+
+          {Auth.loggedIn() ? (
+           <>
+          <Button variant="secondary" onClick={logout} style={{ backgroundColor: '#F7C04A' }} className="btn">
+              Logout
+            </Button>
+            </>
+          ) : (
+            <>
+
             <Button variant="secondary" onClick={handleShow} style={{ backgroundColor: '#F7C04A' }} className="btn">
               Log In
             </Button>
             <Button variant="secondary" onClick={handleShowLogin} style={{ backgroundColor: '#3F497F' }}  className="btn">
               Sign Up
             </Button>
+            </>
+          )}
           </Nav>
+
         </Container>
       </Navbar>
       <Modal show={show} onHide={handleClose}>
