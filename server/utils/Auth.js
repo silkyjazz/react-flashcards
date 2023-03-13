@@ -7,10 +7,7 @@ module.exports = {
   authMiddleware: function ({req} ) {
 
     let token = req.body.token || req.query.token || req.headers.authorization;
-    console.log(token)
-console.log(req.body);
-console.log(req.query);
-console.log(req.headers);
+
 console.log(req.headers.authorization);
     // ["Bearer", "<tokenvalue>"]
     if (req.headers.authorization) {
