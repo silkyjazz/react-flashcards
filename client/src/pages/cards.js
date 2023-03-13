@@ -5,13 +5,14 @@ import { QUERY_USER } from "../utils/query";
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button';
 import Auth from '../utils/auth';
+import CardList from '../components/CardList';
 
 const CardPage = () => {
     // const { username: userParam } = useParams();
 
-  const { loading, data } = useQuery(QUERY_CARDS);
+//   const { loading, data } = useQuery(QUERY_CARDS);
 
-  const cardList = data?.card || [];         
+//   const cardList = data?.card || [];         
     
 
     return (

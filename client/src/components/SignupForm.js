@@ -5,6 +5,7 @@ import { CREATE_USER } from '../utils/mutation';
 import swal from 'sweetalert';
 import Auth from '../utils/auth';
 
+
 const SignupForm = () => {
   const [createUser, { loading, error }] = useMutation(CREATE_USER);
   // set initial form state
@@ -31,6 +32,7 @@ const SignupForm = () => {
   };
 
   const handleFormSubmit = async (event) => {
+    console.log(event)
     event.preventDefault();
 
     // check if form has everything (as per react-bootstrap docs)
@@ -43,7 +45,7 @@ const SignupForm = () => {
 
     if (error) {
       console.log(error);
-      throw new Error("something went wrong!");
+      throw new Error(`${error.message}`);
     }
 
     try {
@@ -64,7 +66,7 @@ const SignupForm = () => {
       email: '',
       password: '',
     });
-    // console.log("Account Created!")
+    console.log("Account Created!")
   };
 
   return (

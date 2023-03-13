@@ -12,7 +12,7 @@ const CreateCardForm = () => {
             _id: "",
             question: "",
             answer: "",
-            createdAt: "",
+            // createdAt: "",
           });
 
             const [createCard, { error }] = useMutation(CREATE_CARD, {
