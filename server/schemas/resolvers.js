@@ -113,10 +113,12 @@ const resolvers = {
 
     createUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
-      // const token = signToken(user);
-      // return { token, user };
+      const token = signToken(user);
       console.log("successfully created " + user);
-      return user;
+      
+      return { token, user };
+      
+      // returnuser;
     },
 
     login: async (parent, { email, password }) => {

@@ -1,9 +1,9 @@
 import React from "react";
-import { Card, Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 // import Image from "../images/icon-1.png";
-import lpDeck from '../images/deck.png';
-import lpCard from '../images/card.png';
-import lpHabit from '../images/habit.png';
+import lpDeck from '../images/deck2.png';
+import lpCard from '../images/card2.png';
+import lpHabit from '../images/habit2.png';
 
 function Home() {
  
@@ -34,10 +34,10 @@ function Home() {
             <img src={lpDeck} className="landing-images" alt="Create a deck" />
             </Col>
             <Col  className="landing-middle"lg={4} sm={6}>
-            <img src={lpCard} className="landing-images"  alt="Create a deck" />
+            <img src={lpCard} className="landing-images"  alt="Create a card" />
             </Col>
             <Col  className="landing-middle" lg={4} sm={6}>
-            <img src={lpHabit} className="landing-images"  alt="Create a deck" />
+            <img src={lpHabit} className="landing-images"  alt="Create a habit" />
             </Col>
         </Row>
       </Container>

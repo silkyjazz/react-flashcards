@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 // import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab, Button } from "react-bootstrap";
+import { Navbar, Nav, Container, Modal, Button } from "react-bootstrap";
 import logo from "../images/logo-yellow.png";
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
@@ -25,7 +25,7 @@ const AppNavbar = () => {
             STUDY.io
           </Navbar.Brand>
           <Nav className="ml-auto">
-            <Button variant="secondary" onClick={handleShow} style={{ backgroundColor: '#3F497F' }} className="btn">
+            <Button variant="secondary" onClick={handleShow} style={{ backgroundColor: '#F7C04A' }} className="btn">
               Log In
             </Button>
             <Button variant="secondary" onClick={handleShowLogin} style={{ backgroundColor: '#3F497F' }}  className="btn">
@@ -54,7 +54,9 @@ const AppNavbar = () => {
   );
 };
 
+
 export default AppNavbar;
+
 
 {/* <Modal show={show} onHide={handleClose}>
 <Modal.Header closeButton>
