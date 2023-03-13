@@ -17,9 +17,9 @@
 //       // pass URL parameter
 //       variables: { deckId: deckId },
 //     });
-  
+
 //     const findAllDecks = data?.findAllDecks || {};
-  
+
 //     if (loading) {
 //       return <div>Loading...</div>;
 //     }
@@ -52,7 +52,7 @@
 //           <Button variant="primary">Save changes</Button>
 //         </Modal.Footer>
 //       </Modal.Dialog>
-// {/* 
+// {/*
 // <div>
 // <CardList/>
 // </div> */}
@@ -65,57 +65,66 @@
 
 // export default CardPage;
 
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-
-import { useQuery } from '@apollo/client';
+import { useQuery } from "@apollo/client";
 
 import { QUERY_DECK } from "../utils/query";
 
-
-import CardList from '../components/CardList';
-
+import CardList from "../components/CardList";
 
 import { Link } from "react-router-dom";
 import { Card, Modal, Button, Row, Col } from "react-bootstrap";
 import CreateCardForm from "../components/CreateCardForm";
 
 function CardWithModal() {
-
-
   const [showModal, setShowModal] = useState(false);
 
   const handleModalClose = () => setShowModal(false);
   const handleCardClick = () => setShowModal(true);
 
+  const study = (event) => {
+    event.preventDefault();
+    window.location.assign("/study");
+  };
+  //   const { deckId } = useParams();
 
+  //   const { loading, data } = useQuery(QUERY_DECK, {
+  //     // pass URL parameter
+  //     variables: { deckId: deckId },
+  //   });
 
-  const { deckId } = useParams();
+  //   const findAllDecks = data?.findAllDecks || {};
 
-  const { loading, data } = useQuery(QUERY_DECK, {
-    // pass URL parameter
-    variables: { deckId: deckId },
-  });
-
-  const findAllDecks = data?.findAllDecks || {};
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  //   if (loading) {
+  //     return <div>Loading...</div>;
+  //   }
 
   return (
     <>
-           <h3 className="text-center" >
-                <Link to="/study">Study!</Link>
-              </h3>
-
-        <Card className="text-center" onClick={handleCardClick} style={{ width: '25rem' }}>
+      <h3 className="deck-title text-center">Study Cards</h3>
+      <Row md={3} lg={6} className="g-4">
+        <Card
+          className="text-center"
+          onClick={handleCardClick}
+          style={{ width: "25rem" }}
+        >
           <Card.Body>
-            <Card.Text>+ Create New card</Card.Text>
+            <Card.Text>+ Create New Card</Card.Text>
           </Card.Body>
         </Card>
 
+        <Card
+          className="text-center"
+          onClick={study}
+          style={{ width: "25rem" }}
+        >
+          <Card.Body>
+            <Card.Text>Study</Card.Text>
+          </Card.Body>
+        </Card>
+      </Row>
       <Modal show={showModal} onHide={handleModalClose}>
         <Modal.Header closeButton>
           <Modal.Title class="flashcard-text">Create New Card</Modal.Title>
@@ -135,22 +144,21 @@ function CardWithModal() {
         </Modal.Footer>
       </Modal>
 
-
       <Row xs={1} md={4} className="g-4">
-      {Array.from({ length: 4 }).map((_, idx) => (
-        <Col>
-        {/* <Card className="text-center" onClick={handleCardClick} style={{ width: '25rem' }}> */}
+        {Array.from({ length: 4 }).map((_, idx) => (
+          <Col>
+            {/* <Card className="text-center" onClick={handleCardClick} style={{ width: '25rem' }}> */}
 
-        <Card className="text-center" style={{ width: '25rem' }}>
-          <Card.Body>
-            {/* <Card.Text class="flashcard-text">Question: {'\n'} {userParams ?` ${findAllDecks.question}`: ""} </Card.Text> */}
+            <Card className="text-center" style={{ width: "25rem" }}>
+              <Card.Body>
+                {/* <Card.Text class="flashcard-text">Question: {'\n'} {userParams ?` ${findAllDecks.question}`: ""} </Card.Text> */}
 
-            <Card.Text class="flashcard-text">Questions  </Card.Text>
-          </Card.Body>
-        </Card>
-      </Col>
-      ))}
-    </Row>
+                <Card.Text class="flashcard-text">Questions </Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
     </>
   );
 }

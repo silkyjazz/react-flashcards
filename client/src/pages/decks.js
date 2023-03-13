@@ -5,26 +5,41 @@ import { useQuery } from '@apollo/client';
 
 import { QUERY_DECKS } from "../utils/query";
 
-const Decks = () => {
-    const { username } = useParams();
+import { Link } from "react-router-dom";
+import { Card, Modal, Button, Row, Col } from "react-bootstrap";
 
-    const { loading, data } = useQuery(QUERY_DECKS, {
-      // pass URL parameter
-      variables: { username: username },
-    });
+
+const Decks = () => {
+    // const { username } = useParams();
+
+    // const { loading, data } = useQuery(QUERY_DECKS, {
+    //   // pass URL parameter
+    //   variables: { username: username },
+    // });
   
-    const findAllDecks = data?.findAllDecks || {};
+    // const findAllDecks = data?.findAllDecks || {};
   
-    if (loading) {
-      return <div>Loading...</div>;
-    }
+    // if (loading) {
+    //   return <div>Loading...</div>;
+    // }
+    
     return (
         <div>
             <div>
-                <h3>Decks!</h3>
+                <h3 className="text-center">Card Decks</h3>
           
         
             </div>
+
+            <>
+            <Link to="/create">
+        <Card className="text-center" style={{ width: '25rem' }}>
+          <Card.Body>
+            <Card.Text>+ Create NewDeck</Card.Text>
+          </Card.Body>
+        </Card>
+        </Link>
+        </>
             </div>
         
             );

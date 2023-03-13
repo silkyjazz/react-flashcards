@@ -17,6 +17,7 @@ import Footer from './components/Footer';
 import Study from './pages/study';
 import Cards from './pages/cards';
 import Decks from './pages/decks'
+import Create from './pages/createDeck'
 
 
 const httpLink = createHttpLink({
@@ -64,7 +65,7 @@ function App() {
 
           <Route exact path='/' element={<Home/>} />
           {/* <Route  path={`/${window.login.user.username}/decks`} component={<Decks/>} /> */}
-          {/* <Route exact path='/:userId/createDeck' component={createDeck} /> */}
+          <Route path='/create' element={<Create/>} />
           <Route exact path='/study' element={<Study/>} />
           {/* <Route exact path='/:deckId/cards' component={<Cards/>} /> */}
           <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
