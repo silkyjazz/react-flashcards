@@ -1,13 +1,12 @@
-import { Card, Modal, Button, Row, Col } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const DeckList = ({ deck }) => {
   return (
     <Link className="btn" to={`/${deck._id}/cards`}>
-      {" "}
-      <Card className="text-center" style={{ width: "25rem" }}>
-        <Card.Text className="flashcard-text">{deck.name} </Card.Text>
-      </Card>{" "}
+      <Card className="text-center" style={{ height: "150px", width: "300px"}}>
+        <Card.Text className="deck-text">{deck.name} </Card.Text>
+      </Card>
     </Link>
   );
 };

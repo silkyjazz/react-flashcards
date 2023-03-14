@@ -121,6 +121,9 @@ body {
     display: flex;
     flex-wrap: wrap;
 }
+.deck-text{
+    margin-top: 60px;
+}
 #study-btn{
     margin: 10px;
     display: flex;
