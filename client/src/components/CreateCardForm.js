@@ -6,7 +6,7 @@ import { Form } from "react-bootstrap";
 
 // import Auth from '../../utils/auth';
 
-const CreateCardForm = ({question, answer}) => {
+const CreateCardForm = ({ question, answer}) => {
     // const [username, setUsername] = useState({
     //         _id: "",
     //         question: "",
@@ -52,7 +52,7 @@ const CreateCardForm = ({question, answer}) => {
     //               console.error(err);
     //             }
     //           };
-
+    
     
     function handleQuestionChange(e) {
        question(e.target.value)

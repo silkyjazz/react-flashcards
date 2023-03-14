@@ -12,7 +12,7 @@ export const CREATE_DECK = gql`
 export const CREATE_CARD = gql`
   mutation CreateCard($deckId: ID!, $question: String!, $answer: String!) {
     createCard(deckId: $deckId, question: $question, answer: $answer) {
-      _id
+      deckId
       question
       answer
     }

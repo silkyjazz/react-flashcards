@@ -1,11 +1,11 @@
 import React, { useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
-import { QUERY_DECK } from "../utils/query";
-import { CREATE_DECK } from "../utils/mutation";
+import { QUERY_CARD, QUERY_DECK } from "../utils/query";
+import { CREATE_CARD, CREATE_DECK } from "../utils/mutation";
 import { Card, Modal, Button, Row, Col } from "react-bootstrap";
 import CreateCardForm from "../components/CreateCardForm";
-
+import CardList from '../components/CardList'
 
 // const ACTIONS = {
 //   NEW_CARD: "new-card",
@@ -29,14 +29,21 @@ import CreateCardForm from "../components/CreateCardForm";
 const Create = () => {
 //   const [cards, dispatch] = useReducer(reducer, []);
 
-  const { loading, data } = useQuery(QUERY_DECK);
+  const { loading, data } = useQuery(QUERY_CARD);
 
   const [formData, setFormData] = useState({
-    deck_name: "nerd",
+    deckId: "",
     question: "",
     answer: "",
   });
   
+  function handleDeckIdChange(e) {
+    setFormData({
+        ...formData,
+        deckId: e
+    })
+  }
+
   function handleQuestionsChange(e) {
     setFormData({
         ...formData,
@@ -53,7 +60,7 @@ const Create = () => {
 
   let navigate = useNavigate();
 
-  const [makeDeck, { error }] = useMutation(CREATE_DECK);
+  const [makeCard, { error }] = useMutation(CREATE_CARD);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -68,8 +75,8 @@ const Create = () => {
 
     try {
         console.log('test2')
-      const { data } = await makeDeck({
-        variables: { username: formData.deck_name, name:formData.answer },
+      const { data } = await makeCard({
+        variables: { deckId: Date.now(), question: formData.question, answer:formData.answer },
         
       });
       
@@ -131,7 +138,7 @@ const Create = () => {
         </Modal.Header>
 
         <Modal.Body id="contained-modal-title-vcenter">
-          <CreateCardForm question={handleQuestionsChange} answer={handleAnswersChange}/>
+          <CreateCardForm deckId={handleDeckIdChange} question={handleQuestionsChange} answer={handleAnswersChange}/>
         </Modal.Body>
 
         <Modal.Footer>
@@ -146,12 +153,12 @@ const Create = () => {
             </div>
           </form>
 
-
+            // <CardList />
         )}
         <Button
           variant="secondary"
           className="create-card item-align-center"
-          onClick={makeDeck}
+          onClick={makeCard}
         >
           Create Deck
         </Button>
