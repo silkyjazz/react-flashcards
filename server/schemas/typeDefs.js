@@ -22,8 +22,9 @@ const typeDefs = gql`
     }
 
     type Auth {
-        token: ID
-        username: User
+        token: ID!
+        user: User
+        
     }
 
     type Query {
@@ -43,7 +44,7 @@ const typeDefs = gql`
         deleteDeck(userId: ID!, deckId: ID!): Deck
         deleteCard(deckId: ID!, cardId: ID!): Card
 
-        createUser(username: String!, email: String!, password: String!): User
+        createUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
     }
 `;

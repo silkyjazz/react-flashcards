@@ -1,7 +1,7 @@
-const { Schema } = require("mongoose");
+const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 const Deck = require("./Deck");
-const mongoose = require('mongoose')
+// const mongoose = require('mongoose')
 
 
 const userSchema = new Schema({
@@ -44,6 +44,6 @@ userSchema.methods.isCorrectPassword = async function (password) {
 };
 
 // create an instance of user schema
-const User = mongoose.model("User", userSchema);
+const User = model("User", userSchema);
 
 module.exports = User;
