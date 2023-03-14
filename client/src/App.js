@@ -1,78 +1,70 @@
-// import React from 'react';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React, { useState } from "react";
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
-import Home from './pages/home.js'
-import Navbar from './components/NavBar';
-import Footer from './components/Footer';
-import Study from './pages/study';
-import Cards from './pages/cards';
-import Decks from './pages/decks'
-import Create from './pages/createDeck'
-
+import Home from "./pages/home.js";
+import Navbar from "./components/NavBar";
+import Footer from "./components/Footer";
+import Study from "./pages/study";
+import Cards from "./pages/cards";
+import Decks from "./pages/decks";
+import Create from "./pages/createDeck";
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = localStorage.getItem('id_token');
-
+  const token = localStorage.getItem("id_token");
   // return the headers to the context so httpLink can read them
+  console.log("=======headers has ===line 27 app.js===", headers)
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
-
-
 
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
-
-
 function App() {
-
   return (
     <ApolloProvider client={client}>
-    <Router>
-      <>
-        <Navbar />
-        <Routes>
-          <Route exact path='/' element={<Home/>} />     
-          <Route exact path='/study' element={<Study/>} />
-          <Route  path="/cards" element={<Cards/>} />
+      <Router>
+        <>
+          <Navbar />
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            {/* get decks by user ID */}
+            <Route path="/:userId/decks" component={<Decks />} />
+            <Route path="/:userId/createDeck" element={<Create />} />
+            {/* get cards by deck ID */}
+            {/* card modification using modal instead of a new page */}
+            <Route path="/:deckId/cards" element={<Cards />} />
+            <Route path="/:deckId/study" element={<Study />} />
 
-          <Route  path="/decks" element={<Decks/>} />
-          {/* <Route exact path='/:userId/createDeck' component={createDeck} />
-     
-          <Route exact path='/:deckId/cards' component={cards} /> */}
-
-          <Route exact path='/' element={<Home/>} />
-          {/* <Route  path={`/${window.login.user.username}/decks`} component={<Decks/>} /> */}
-          <Route path='/create' element={<Create/>} />
-          <Route exact path='/study' element={<Study/>} />
-          {/* <Route exact path='/:deckId/cards' component={<Cards/>} /> */}
-          <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
-        </Routes>
-        <Footer />
-      </>
-    </Router>
+            {/* FOR TESTING  */}
+            {/* <Route exact path='/study' element={<Study/>} /> */}
+            {/* <Route path="/create" element={<Create />} /> */}
+            {/* <Route  path="/cards" element={<Cards/>} /> */}
+            {/* <Route  path="/decks" element={<Decks/>} /> */}
+            
+            <Route render={() => <h1 className="display-2">Wrong page!</h1>} />
+          </Routes>
+          <Footer />
+        </>
+      </Router>
     </ApolloProvider>
   );
 }
