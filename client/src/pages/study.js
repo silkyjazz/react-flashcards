@@ -1,16 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
-// import {useQuery} from '@apollo/client';
-// import {QUERY_CARD} from '../utils/query';
+import {useQuery} from '@apollo/client';
+import {QUERY_DECK} from '../utils/query';
 
+// const deckId='6410bf0ced9d1fd11327a177';
 
-function Study() {
+function Study({deckId}) {
+
   const [flipped, setFlipped] = useState(false);
-//   const { loading, error, data } = useQuery(QUERY_CARD);
+  const { loading, error, data } = useQuery(QUERY_DECK, {
+    variables: {deckId},
+  });
+  const [cards, setCards] = useState([])
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(()=>{
+    if(data){
+      const shuffledCards = data.queryDeck.cards.sort(() => Math.random() - 0.5);
+      setCards(shuffledCards);
+    }
+  }, [data]);
 
   const handleClick = () => {
     setFlipped(!flipped);
   };
+
+  const handlePrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+      setFlipped(false);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentIndex < cards.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+      setFlipped(false);
+    }
+  };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  const currentCard = cards[currentIndex];
+
   return (
     <Container className="flashcard-container">
       <Row>
@@ -18,7 +51,7 @@ function Study() {
           <Card onClick={handleClick}>
             <Card.Body className={`flashcard ${flipped ? "flipped" : ""}`}>
               <Card.Text className="flashcard-text front">
-              {flipped ? "Answer" : "Question"}
+              {flipped ? currentCard.answer : currentCard.question}
               </Card.Text>
              
             </Card.Body>
@@ -29,11 +62,14 @@ function Study() {
             <Button
               variant="secondary"
               style={{ backgroundColor: "#F7C04A" }}
-              className="mr-2"
+              // className="mr-2"
+              onClick={handlePrev}
             >
               Previous
             </Button>
-            <Button variant="secondary" style={{ backgroundColor: "#F7C04A" }}>
+            <Button variant="secondary" 
+             onClick={handleNext} 
+             style={{ backgroundColor: "#F7C04A" }}>
               Next
             </Button>
           </Col>
