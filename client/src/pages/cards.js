@@ -6,6 +6,9 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_DECK } from "../utils/query";
 
+import { useMutation } from "@apollo/client";
+import { CREATE_CARD, UPDATE_CARD, DELETE_CARD } from "../utils/mutation";
+
 import logo from "../images/logo-yellow.png";
 import CardList from "../components/CardList";
 import { Link } from "react-router-dom";
