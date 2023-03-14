@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 
-import { QUERY_CARDS, QUERY_DECK } from "../utils/query";
+import { QUERY_CARD, QUERY_DECK } from "../utils/query";
 import { DELETE_CARD, UPDATE_CARD, CREATE_CARD } from "../utils/mutation";
 
 import { Card, Modal, Button, Form } from "react-bootstrap";
@@ -15,47 +15,47 @@ const CreateCardForm = () => {
     //         _id: "",
     //         question: "",
     //         answer: "",
-          //   // createdAt: "",
-          // });
+    //         // createdAt: "",
+    //       });
 
-          //   const [createCard, { error }] = useMutation(CREATE_CARD, {
-          //       update(cache, { data: { createCard } }) {
-          //         try {
-          //           const { cards } = cache.readQuery({ query: QUERY_CARDS });
+    //         const [createCard, { error }] = useMutation(CREATE_CARD, {
+    //             update(cache, { data: { createCard } }) {
+    //               try {
+    //                 const { cards } = cache.readQuery({ query: QUERY_CARD });
             
-          //           cache.writeQuery({
-          //             query: QUERY_CARDS,
-          //             data: { cards: [createCard, ...cards] },
-          //           });
-          //         } catch (e) {
-          //           console.error(e);
-          //         }
+    //                 cache.writeQuery({
+    //                   query: QUERY_CARD,
+    //                   data: { cards: [createCard, ...cards] },
+    //                 });
+    //               } catch (e) {
+    //                 console.error(e);
+    //               }
             
-          //         const { deck } = cache.readQuery({ query: QUERY_DECK });
-          //         cache.writeQuery({
-          //           query: QUERY_DECK,
-          //           data: { deck: { ...deck, cards: [...deck.cards, createCard] } },
-          //         });
-          //       },
-          //     });
+    //               const { deck } = cache.readQuery({ query: QUERY_DECK });
+    //               cache.writeQuery({
+    //                 query: QUERY_DECK,
+    //                 data: { deck: { ...deck, cards: [...deck.cards, createCard] } },
+    //               });
+    //             },
+    //           });
               
 
-          //     const handleFormSubmit = async (event) => {
-          //       event.preventDefault();
+    //           const handleFormSubmit = async (event) => {
+    //             event.preventDefault();
             
-          //       try {
-          //         const { data } = await createCard({
-          //           // variables: {
-          //           //   question,
-          //           //   thoughtAuthor: Auth.getProfile().data.username,
-          //           // },
-          //         });
+    //             try {
+    //               const { data } = await createCard({
+    //                 // variables: {
+    //                 //   question,
+    //                 //   thoughtAuthor: Auth.getProfile().data.username,
+    //                 // },
+    //               });
             
-          //         setUsername('');
-          //       } catch (err) {
-          //         console.error(err);
-          //       }
-          //     };
+    //               setUsername('');
+    //             } catch (err) {
+    //               console.error(err);
+    //             }
+    //           };
     return (
         <div>
 
@@ -68,8 +68,7 @@ const CreateCardForm = () => {
                 <Form.Group className="mb-3" controlId="cardA">
                     <Form.Label className='modal-text text-center' htmlFor="answer">Answer</Form.Label>        
                     <Form.Control as="textarea" rows={2} />
-                </Form.Group>
-      
+                </Form.Group>    
         
             </>
 

@@ -4,7 +4,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_DECK } from "../utils/query";
 import { CREATE_DECK } from "../utils/mutation";
 import { Card, Modal, Button, Row, Col } from "react-bootstrap";
-import CreateCardForm from "../components/CreateCardForm";
+import AddCardModal from "../components/CreateCardModal";
 
 const ACTIONS = {
   NEW_CARD: "new-card",
@@ -87,7 +87,7 @@ const Create = () => {
                   onChange={(e) => setFormData(e.target.value)}
                 />
                 <br></br>
-                
+                <div id="root"></div>
               </div>
               <Col md={{ span: 0 }}>
                 <Card
@@ -113,7 +113,7 @@ const Create = () => {
         </Modal.Header>
 
         <Modal.Body id="contained-modal-title-vcenter">
-          <CreateCardForm />
+          <AddCardModal />
         </Modal.Body>
 
         <Modal.Footer>
