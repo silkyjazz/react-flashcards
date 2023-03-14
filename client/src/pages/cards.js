@@ -65,10 +65,10 @@ function CardWithModal() {
 
       {/* create new card and Card List */}
       <Row className="g-4 m-1">
-        <Col  xs={12} sm={12} md={4} lg={3} >
-          <Card className="text-center" onClick={handleCardClick}>
+        <Col xs={12} sm={12} md={4} lg={3} >
+          <Card className="text-center" onClick={handleCardClick}  style={{ height: "300px" }}>
             <Card.Body>
-              <Card.Text className="flashcard-text">
+              <Card.Text className="new-card-text">
                 + Create New Card
               </Card.Text>
             </Card.Body>
