@@ -2,54 +2,54 @@ import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import { LOGIN_USER } from "../utils/mutation";
 import { useMutation } from "@apollo/client";
-
+import { useFormik } from "formik";
 import Auth from "../utils/auth";
 
 const LoginForm = () => {
-  const [formState, setFormState] = useState({ email: "", password: "" });
-
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [login, { error }] = useMutation(LOGIN_USER);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormState({ ...formState, [name]: value });
-  };
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    if (error) {
-      console.error('error from line 29 loginForm.js' + error)
-    }
-
+  const onSubmit = async (values, actions) => {
     try {
       const { data } = await login({
-        variables: { ...formState },
+        variables: { ...values },
       });
 
-      const user = data.login.user.username
+      const user = data.login.user.username;
       Auth.login(data.login.token);
-      window.location.assign(`/${user}/decks`)
+      window.location.assign(`/${user}/decks`);
     } catch (error) {
       console.error(error);
+      setShowAlert(true);
     }
 
-    setFormState({
+    actions.resetForm();
+  };
+
+  const {
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    handleChange,
+    handleSubmit,
+    handleBlur,
+  } = useFormik({
+    initialValues: {
       email: "",
       password: "",
-    });
-  };
+    },
+    onSubmit,
+  });
+
+  if (error) {
+    console.error('error on useMutation loginform.js', error)
+  }
 
   return (
     <>
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+      <Form noValidate validated={validated} onSubmit={handleSubmit} autoComplete="off">
         <Alert
           dismissible
           onClose={() => setShowAlert(false)}
@@ -67,9 +67,10 @@ const LoginForm = () => {
             type="text"
             placeholder="Your email"
             name="email"
-            onChange={handleInputChange}
-            value={formState.email}
-            required
+            onChange={handleChange}
+            value={values.email}
+            onBlur={handleBlur}
+            className={errors.email && touched.email ? "input-error" : ""}
           />
           <Form.Control.Feedback type="invalid">
             Email is required!
@@ -84,16 +85,19 @@ const LoginForm = () => {
             type="password"
             placeholder="Your password"
             name="password"
-            onChange={handleInputChange}
-            value={formState.password}
-            required
+            onChange={handleChange}
+            value={values.password}
+            onBlur={handleBlur}
+            className={errors.password && touched.password ? "input-error" : ""}
           />
           <Form.Control.Feedback type="invalid">
             Password is required!
           </Form.Control.Feedback>
         </Form.Group>
         <Button
-          disabled={!(formState.email && formState.password)}
+          // TODO: styling when the button is disabled
+          // target it with === button:disabled
+          disabled={isSubmitting}
           type="submit"
           variant="success"
         >

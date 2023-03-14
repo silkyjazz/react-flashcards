@@ -4,77 +4,71 @@ import { useMutation } from "@apollo/client";
 import { CREATE_USER } from "../utils/mutation";
 import swal from "sweetalert";
 import Auth from "../utils/auth";
+import { useFormik } from "formik";
+import { signUpSchema } from "../utils/formValidationSchema"
 
 const SignupForm = () => {
   const [createUser, { loading, error }] = useMutation(CREATE_USER);
-  // set initial form state
-  const [userFormData, setUserFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
-  // set state for form validation
-  const [validated] = useState(false);
-  // set state for alert
-  const [showAlert, setShowAlert] = useState(false);
+    // set state for form validation
+    // set state for alert
+    const [validated] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
+  
+    useEffect(() => {
+      if (error) {
+        setShowAlert(true);
+      } else {
+        setShowAlert(false);
+      }
+    }, [error]);
 
-  useEffect(() => {
-    if (error) {
-      setShowAlert(true);
-    } else {
-      setShowAlert(false);
-    }
-  }, [error]);
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setUserFormData({ ...userFormData, [name]: value });
-  };
+    const onSubmit = async (values, actions) => {
+      try {
+        const { data } = await createUser({
+          variables: { ...values},
+        });
+        const user = data.createUser.user.username;
 
-  const handleFormSubmit = async (event) => {
-    console.log(event);
-    event.preventDefault();
-    console.log(userFormData);
-    // check if form has everything (as per react-bootstrap docs)
-    // const form = event.currentTarget;
-    // if (form.checkValidity() === false) {
-    //   event.preventDefault();
-    //   event.stopPropagation();
-    // }
-    // setValidated(true);
-
-    // if (error) {
-    //   console.log(error);
-    //   throw new Error(`${error.message}`);
-    // }
-
-    try {
-      const { data } = await createUser({
-        variables: { ...userFormData},
-      });
-      console.log(data);
-      Auth.login(data.createUser.token);
-      setShowAlert(false);
-      swal("Success!", "Account created successfully!", "success");
-    } catch (err) {
-      console.error(err);
-      setShowAlert(true);
-    }
-    
-
-    setUserFormData({
-      username: "",
-      email: "",
-      password: "",
+        Auth.login(data.createUser.token);
+        setShowAlert(false);
+        swal("Success!", "Account created successfully!", "success");
+        window.location.assign(`/${user}/decks`);
+      } catch (err) {
+        console.error(err);
+        setShowAlert(true);
+      }
+  
+      actions.resetForm();
+      console.log("Account created successfully!")
+    };
+  
+    const {
+      values,
+      errors,
+      touched,
+      isSubmitting,
+      handleChange,
+      handleSubmit,
+      handleBlur,
+    } = useFormik({
+      initialValues: {
+        username: "",
+        email: "",
+        password: "",
+      },
+      validationSchema: signUpSchema,
+      onSubmit,
     });
-    console.log("Account Created!");
-  };
+  
+    if (error) {
+      console.error('error on useMutation signup.js', error)
+    }
 
   return (
     <>
       {/* This is needed for the validation functionality above */}
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        {/* show alert if server response is bad */}
+      <Form noValidate validated={validated} onSubmit={handleSubmit} autoComplete="off">
         <Alert
           dismissible
           onClose={() => setShowAlert(false)}
@@ -90,9 +84,10 @@ const SignupForm = () => {
             type="text"
             placeholder="Your username"
             name="username"
-            onChange={handleInputChange}
-            value={userFormData.username}
-            required
+            onChange={handleChange}
+            value={values.username}
+            onBlue={handleBlur}
+            className={errors.email && touched.email ? "input-error" : ""}
           />
           <Form.Control.Feedback type="invalid">
             Username is required!
@@ -103,11 +98,12 @@ const SignupForm = () => {
           <Form.Label className="modal-text" htmlFor="email">Email</Form.Label>
           <Form.Control
             type="email"
-            placeholder="Your email address"
+            placeholder="Enter your email address"
             name="email"
-            onChange={handleInputChange}
-            value={userFormData.email}
-            required
+            onChange={handleChange}
+            value={values.email}
+            onBlue={handleBlur}
+            className={errors.email && touched.email ? "input-error" : ""}
           />
           <Form.Control.Feedback type="invalid">
             Email is required!
@@ -118,24 +114,19 @@ const SignupForm = () => {
           <Form.Label className="modal-text" htmlFor="password">Password</Form.Label>
           <Form.Control
             type="password"
-            placeholder="Your password"
+            placeholder="**********"
             name="password"
-            onChange={handleInputChange}
-            value={userFormData.password}
-            required
+            onChange={handleChange}
+            value={values.password}
+            onBlue={handleBlur}
+            className={errors.email && touched.email ? "input-error" : ""}
           />
           <Form.Control.Feedback type="invalid">
             Password is required!
           </Form.Control.Feedback>
         </Form.Group>
         <Button
-          disabled={
-            !(
-              userFormData.username &&
-              userFormData.email &&
-              userFormData.password
-            )
-          }
+          disabled={isSubmitting}
           type="submit"
           variant="secondary"
           className="signup-btn"
