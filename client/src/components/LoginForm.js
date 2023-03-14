@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
-import { Navigate } from 'react-router-dom';
 import { LOGIN_USER } from "../utils/mutation";
 import { useMutation } from "@apollo/client";
 
@@ -26,18 +25,18 @@ const LoginForm = () => {
       event.preventDefault();
       event.stopPropagation();
     }
-
+    if (error) {
+      console.error('error from line 29 loginForm.js' + error)
+    }
 
     try {
       const { data } = await login({
         variables: { ...formState },
       });
-      
+
       const user = data.login.user.username
-      console.log(user)
       Auth.login(data.login.token);
-      return <Navigate to={`/${user}/decks`} />
-      
+      window.location.assign(`/${user}/decks`)
     } catch (error) {
       console.error(error);
     }
