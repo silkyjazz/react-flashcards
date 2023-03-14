@@ -12,7 +12,9 @@
 }
 
 * {
-    color: var(--secondary-color);
+    /* color: var(--secondary-color); */
+
+    color: black;    /* testing */
     font-family: 'Noto Serif Malayalam', serif;
 }
 

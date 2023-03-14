@@ -1,48 +1,34 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-
-import { useQuery } from '@apollo/client';
-
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
 import { QUERY_DECKS } from "../utils/query";
-
-import { Link } from "react-router-dom";
+import { UPDATE_DECK, DELETE_DECK, } from "../utils/mutation"
+import DeckList from "../components/DeckList";
 import { Card, Modal, Button, Row, Col } from "react-bootstrap";
 
-
 const Decks = () => {
-    // const { username } = useParams();
+  const { username } = useParams();
+  const { loading, data } = useQuery(QUERY_DECKS, {
+    variables: { username: username },
+  });
 
-    // const { loading, data } = useQuery(QUERY_DECKS, {
-    //   // pass URL parameter
-    //   variables: { username: username },
-    // });
-  
-    // const findAllDecks = data?.findAllDecks || {};
-  
-    // if (loading) {
-    //   return <div>Loading...</div>;
-    // }
-    
-    return (
-        <div>
-            <div>
-                <h3 className="text-center">Card Decks</h3>
-          
-        
-            </div>
+  const decks = data?.findAllDecks || {};
 
-            <>
-            <Link to="/create">
-        <Card className="text-center" style={{ width: '25rem' }}>
-          <Card.Body>
-            <Card.Text className="card-page-text">+ Create NewDeck</Card.Text>
-          </Card.Body>
-        </Card>
-        </Link>
-        </>
-            </div>
-        
-            );
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // TODO UPDATE_DECK, DELETE_DECK
+
+  return (
+    <Row>
+      {decks.map((deck, index) => (
+        <Col key={deck._id} xs={1} md={4} className="g-4">
+        <DeckList deck={deck} id={index} />
+        </Col>
+      ))}
+    </Row>
+  );
 };
 
 export default Decks;

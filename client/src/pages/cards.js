@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // route should be /:deckId/cards
 // get ID of the deck
 import { useParams } from "react-router-dom";
@@ -17,32 +17,27 @@ import CreateCardForm from "../components/CreateCardForm";
 
 function CardWithModal() {
   const [showModal, setShowModal] = useState(false);
-
   const handleModalClose = () => setShowModal(false);
   const handleCardClick = () => setShowModal(true);
 
+  // Get all cards from DB
+  const { deckId: deckParam } = useParams();
+  const { loading, data } = useQuery(QUERY_DECK, {
+    variables: { _id: deckParam },
+  });
+
+  // Create/ update/ delete
+
   const study = (event) => {
     event.preventDefault();
-    window.location.assign("/study");
+    window.location.assign("/:deckId/study");
   };
-
-  // TODO: change to param id instead of hardcoded one
-  const sampleDeckId = '640d3a2352d85bcf33334650';
-  // const { deckId: deckParam } = useParams();
-  // const { loading, data } = useQuery(QUERY_DECK, {
-  //   variables: { _id: deckParam },
-  // });
-
-  // getting all the cards associate with the deck (params ID)
-  const { loading, data } = useQuery(QUERY_DECK, {
-      variables: { _id: sampleDeckId },
-  });
 
   const cards = data?.findSingleDeck.cards || [];
 
   // display loading
   if (loading) {
-    return <h1>Loading...</h1>
+    return <h1>Loading...</h1>;
   }
 
   return (

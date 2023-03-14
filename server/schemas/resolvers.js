@@ -1,6 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { Card, Deck, User } = require("../models");
-// const { Auth } = require("../utils/Auth");
 const { signToken } = require('../utils/auth');
 
 
@@ -119,8 +118,6 @@ const resolvers = {
       console.log("successfully created " + user);
       
       return { token, user };
-      
-      // returnuser;
     },
  
 
