@@ -1,4 +1,4 @@
-import { Card, Modal, Button, Row, Col } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 const CardList = ({card}) => {
   return (
