@@ -29,7 +29,7 @@ const LoginForm = () => {
 
 
     try {
-      debugger
+      
       const { data } = await login({
         variables: { ...formState },
       });
