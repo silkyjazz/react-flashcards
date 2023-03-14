@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_DECKS } from "../utils/query";
 import { UPDATE_DECK, DELETE_DECK } from "../utils/mutation";
 import DeckList from "../components/DeckList";
-import { Card, Modal, Button, Row, Col } from "react-bootstrap";
+import { Container, Card, Modal, Button, Row, Col } from "react-bootstrap";
 import CreateDeckForm from "../components/CreateDeckForm";
 
 const Decks = () => {
@@ -28,6 +28,7 @@ const Decks = () => {
   // TODO UPDATE_DECK, DELETE_DECK
 
   return (
+    <Container>
     <Row>
       {/* button to show Card modal */}
       <Col md={{ span: 0 }}>
@@ -72,7 +73,8 @@ const Decks = () => {
           <DeckList deck={deck} id={index} />
         </Col>
       ))}
-    </Row>
+    </Row> 
+    </Container>
   );
 };
 
