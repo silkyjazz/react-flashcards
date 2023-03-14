@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_DECKS } from "../utils/query";
-import { UPDATE_DECK, DELETE_DECK, CREATE_DECK } from "../utils/mutation";
+import { UPDATE_DECK, DELETE_DECK } from "../utils/mutation";
 import DeckList from "../components/DeckList";
 import { Card, Modal, Button, Row, Col } from "react-bootstrap";
 import CreateDeckForm from "../components/CreateDeckForm";
@@ -12,9 +12,8 @@ const Decks = () => {
   const { loading, data } = useQuery(QUERY_DECKS, {
     variables: { username: usernameParam },
   });
-  
 
-
+  // handles visibility of createDeck Modal
   const [showModal, setShowModal] = useState(false);
 
   const handleModalClose = () => setShowModal(false);
@@ -30,6 +29,7 @@ const Decks = () => {
 
   return (
     <Row>
+      {/* button to show Card modal */}
       <Col md={{ span: 0 }}>
         <Card
           className="text-center"
@@ -47,6 +47,8 @@ const Decks = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
+        <CreateDeckForm />
+        {/* modal card */}
         <Modal.Header closeButton>
           <Modal.Title className="modal-Text">Create New Deck</Modal.Title>
         </Modal.Header>
@@ -54,7 +56,7 @@ const Decks = () => {
         <Modal.Body id="contained-title-vcenter">
           <CreateDeckForm />
         </Modal.Body>
-
+        
         <Modal.Footer>
           <Button variant="secondary" onClick={handleModalClose}>
             Close
@@ -64,6 +66,7 @@ const Decks = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+      {/* list of our decks */}
       {decks.map((deck, index) => (
         <Col key={deck._id} xs={1} md={4} className="g-4">
           <DeckList deck={deck} id={index} />

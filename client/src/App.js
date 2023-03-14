@@ -14,7 +14,7 @@ import Footer from "./components/Footer";
 import Study from "./pages/study";
 import Cards from "./pages/cards";
 import Decks from "./pages/decks";
-import Create from "./pages/createDeck";
+
 
 const httpLink = createHttpLink({
   uri: "/graphql",
