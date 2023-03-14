@@ -46,11 +46,11 @@ function CardWithModal() {
       <Row>
         <h3 className="deck-title text-center">Study Cards</h3>
         {/* STUDY BUTTON */}
-        <Col md={{ span: 3, offset: 3 }}>
+        <Col xs={12} sm={12} md={4} lg={12} className="d-flex justify-content-center">
           <Card
-            className="text-center"
-            onClick={study}
-            style={{ width: "25rem" }}
+            className="text-center  m-3"
+            onClick={study} 
+            id="study-btn"
           >
             <Card.Body>
               <Card.Text className="card-page-text">
@@ -64,13 +64,9 @@ function CardWithModal() {
       </Row>
 
       {/* create new card and Card List */}
-      <Row className="g-4">
-        <Col md={{ span: 0 }}>
-          <Card
-            className="text-center"
-            onClick={handleCardClick}
-            style={{ width: "25rem" }}
-          >
+      <Row className="g-4 m-1">
+        <Col  xs={12} sm={12} md={4} lg={3} >
+          <Card className="text-center" onClick={handleCardClick}>
             <Card.Body>
               <Card.Text className="flashcard-text">
                 + Create New Card
@@ -78,9 +74,9 @@ function CardWithModal() {
             </Card.Body>
           </Card>
         </Col>
-        {/* {Array.from({ length: 4 }).map((card, index) => ( */}
+
         {cards.map((card, index) => (
-          <Col key={card._id} xs={1} md={4} className="g-4">
+          <Col key={card._id} xs={12} sm={12} md={6} lg={3} className="g-4">
             <CardList card={card} id={index} />
           </Col>
         ))}

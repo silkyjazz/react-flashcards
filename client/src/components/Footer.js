@@ -29,7 +29,7 @@ function Footer() {
             />
           </a>
         </Col>
-        <Col lg={12} style={{ display: "flex", justifyContent: "center" }}>
+        <Col lg={12} style={{ display: "flex", justifyContent: "center"}}>
           <p>
             {" "}
             © 2023 Brian Zhao, Fayven Amgela, Milton Ly, Jasmine Ulloa. All

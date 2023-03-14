@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 
 const DeckList = ({ deck }) => {
   return (
-    <Card className="text-center" style={{ width: "25rem" }}>
-      <Link className="btn" to={`/${deck._id}/cards`}>
+    <Link className="btn" to={`/${deck._id}/cards`}>
+      {" "}
+      <Card className="text-center" style={{ width: "25rem" }}>
         <Card.Text className="flashcard-text">{deck.name} </Card.Text>
-      </Link>
-    </Card>
+      </Card>{" "}
+    </Link>
   );
 };
 
