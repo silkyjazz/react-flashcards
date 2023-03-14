@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
-import { Navigate, Link } from 'react-router-dom';
 import { LOGIN_USER } from "../utils/mutation";
 import { useMutation } from "@apollo/client";
 
@@ -33,12 +32,10 @@ const LoginForm = () => {
       const { data } = await login({
         variables: { ...formState },
       });
-      console.log('line 35----------------- loginform.js')
-      console.log(data.login)
+
       const user = data.login.user.username
-      console.log(user)
+
       Auth.login(data.login.token);
-      // return <Link to={`/${user}/decks`} />
       window.location.assign(`/${user}/decks`)
       
     } catch (error) {
