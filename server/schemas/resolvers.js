@@ -25,6 +25,7 @@ const resolvers = {
     },
     // Find by deck id populate cards
     findSingleDeck: async (parent, { deckId }) => {
+      console.log('querying a single deck with id', deckId)
       return Deck.findOne({ _id: deckId }).populate("cards");
     },
     // Find by card id sort cards

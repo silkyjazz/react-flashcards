@@ -1,81 +1,13 @@
-// import React from 'react';
-// import { useParams } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
-
-// import { useQuery } from '@apollo/client';
-
-// import { QUERY_DECK } from "../utils/query";
-// import Card from 'react-bootstrap/Card'
-// import Button from 'react-bootstrap/Button';
-
-// import CardList from '../components/CardList';
-
-// const CardPage = () => {
-//     const { deckId } = useParams();
-
-//     const { loading, data } = useQuery(QUERY_DECK, {
-//       // pass URL parameter
-//       variables: { deckId: deckId },
-//     });
-
-//     const findAllDecks = data?.findAllDecks || {};
-
-//     if (loading) {
-//       return <div>Loading...</div>;
-//     }
-//     return (
-// <div>
-//     <div>
-//         <h3>Study cards!</h3>
-//     </div>
-
-//         <div>
-//         <Link to={{pathname: "createCardModal", state: {modal: true},}} className="link">
-//         <Card className="text-center">
-//             <Card.Body>
-//                 <Card.Text>+ Create New card</Card.Text>
-//             </Card.Body>
-//         </Card>
-//     </Link>
-
-//     <Modal.Dialog>
-//         <Modal.Header closeButton>
-//           <Modal.Title>The correct answer is</Modal.Title>
-//         </Modal.Header>
-
-//         <Modal.Body>
-//       <CreateCardForm/>
-//         </Modal.Body>
-
-//         <Modal.Footer>
-//           <Button variant="secondary">Close</Button>
-//           <Button variant="primary">Save changes</Button>
-//         </Modal.Footer>
-//       </Modal.Dialog>
-// {/*
-// <div>
-// <CardList/>
-// </div> */}
-
-//     </div>
-//     </div>
-
-//     );
-// };
-
-// export default CardPage;
-
 import React, { useState } from "react";
+// route should be /:deckId/cards
+// get ID of the deck
 import { useParams } from "react-router-dom";
-
+// query GET the deck on the param
 import { useQuery } from "@apollo/client";
-
 import { QUERY_DECK } from "../utils/query";
+
 import logo from "../images/logo-yellow.png";
-
-
 import CardList from "../components/CardList";
-
 import { Link } from "react-router-dom";
 import { Card, Modal, Button, Row, Col } from "react-bootstrap";
 import CreateCardForm from "../components/CreateCardForm";
@@ -90,22 +22,50 @@ function CardWithModal() {
     event.preventDefault();
     window.location.assign("/study");
   };
-  //   const { deckId } = useParams();
 
-  //   const { loading, data } = useQuery(QUERY_DECK, {
-  //     // pass URL parameter
-  //     variables: { deckId: deckId },
-  //   });
+  // TODO: change to param id instead of hardcoded one
+  const sampleDeckId = '640d3a2352d85bcf33334650';
+  // const { deckId: deckParam } = useParams();
+  // const { loading, data } = useQuery(QUERY_DECK, {
+  //   variables: { _id: deckParam },
+  // });
 
-  //   const findAllDecks = data?.findAllDecks || {};
+  // getting all the cards associate with the deck (params ID)
+  const { loading, data } = useQuery(QUERY_DECK, {
+      variables: { _id: sampleDeckId },
+  });
 
-  //   if (loading) {
-  //     return <div>Loading...</div>;
-  //   }
+  const cards = data?.findSingleDeck.cards || [];
+
+  // display loading
+  if (loading) {
+    return <h1>Loading...</h1>
+  }
 
   return (
     <>
-      <h3 className="deck-title text-center">Study Cards</h3>
+      {/* title for the page */}
+      <Row>
+        <h3 className="deck-title text-center">Study Cards</h3>
+        {/* STUDY BUTTON */}
+        <Col md={{ span: 3, offset: 3 }}>
+          <Card
+            className="text-center"
+            onClick={study}
+            style={{ width: "25rem" }}
+          >
+            <Card.Body>
+              <Card.Text className="card-page-text">
+                {" "}
+                <img className="study-logo" src={logo} alt="logo" />
+                Study
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
+
+      {/* create new card and Card List */}
       <Row className="g-4">
         <Col md={{ span: 0 }}>
           <Card
@@ -114,23 +74,21 @@ function CardWithModal() {
             style={{ width: "25rem" }}
           >
             <Card.Body>
-              <Card.Text className="card-page-text">+ Create New Card</Card.Text>
+              <Card.Text className="flashcard-text">
+                + Create New Card
+              </Card.Text>
             </Card.Body>
           </Card>
         </Col>
-        <Col md={{ span: 3, offset: 3 }}>
-          <Card
-            className="text-center"
-            onClick={study}
-            style={{ width: "25rem" }}
-          >
-            <Card.Body>
-              <Card.Text className="card-page-text">     <img className="study-logo" src={logo} alt="logo" /> 
-              Study</Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
+        {/* {Array.from({ length: 4 }).map((card, index) => ( */}
+        {cards.map((card, index) => (
+          <Col key={card._id} xs={1} md={4} className="g-4">
+            <CardList card={card} id={index} />
+          </Col>
+        ))}
       </Row>
+
+      {/* create new card modal */}
       <Modal
         show={showModal}
         onHide={handleModalClose}
@@ -140,11 +98,9 @@ function CardWithModal() {
         <Modal.Header closeButton>
           <Modal.Title className="modal-text ">Create New Card</Modal.Title>
         </Modal.Header>
-
         <Modal.Body id="contained-modal-title-vcenter">
           <CreateCardForm />
         </Modal.Body>
-
         <Modal.Footer>
           <Button variant="secondary" onClick={handleModalClose}>
             Close
@@ -154,22 +110,6 @@ function CardWithModal() {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      <Row xs={1} md={4} className="g-4">
-        {Array.from({ length: 4 }).map((_, idx) => (
-          <Col>
-            {/* <Card className="text-center" onClick={handleCardClick} style={{ width: '25rem' }}> */}
-
-            <Card className="text-center" style={{ width: "25rem" }}>
-              <Card.Body>
-                {/* <Card.Text class="flashcard-text">Question: {'\n'} {userParams ?` ${findAllDecks.question}`: ""} </Card.Text> */}
-
-                <Card.Text class="flashcard-text">Questions </Card.Text>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
     </>
   );
 }
