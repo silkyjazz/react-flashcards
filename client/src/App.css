@@ -3,26 +3,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Serif+Malayalam&display=swap');
 
 
-:root{
+/* ------ global ------ */
+:root {
     --primary-color: #3F497F;
     --secondary-color: #F8F5E4;
     --tertiary: #F7C04A;
     --font-size: 16px;
 }
+
 * {
-    color: var(--secondary-color);
+    /* color: var(--secondary-color); */
+
+    color: black;    /* testing */
     font-family: 'Noto Serif Malayalam', serif;
 }
-body{
+
+body {
     background-color: var(--primary-color) !important;
     overflow-x: hidden;
 }
+
 #title {
     color: var(--secondary-color);
     font-family: 'Bungee', cursive;
     font-size: 35px;
 }
 
+/* ------ nav bar ------ */
 .navbar-logo {
     height: 80px;
     max-width: 100%;
@@ -32,18 +39,22 @@ body{
     height: 25px;
     max-width: 100%;
 }
+
 .btn {
     margin-right: 10px;
     background: var(--tertiary);
-  }
-.heading{
-    font-family: 'Bebas Neue';
+
+
+.heading {
+    font-family: 'Bebas Neue', cursive;
     font-size: 75px;
     display: flex;
     justify-content: center;
     color: var(--secondary-color);
 }
-.landing-container{
+
+/* ------ landing page ------ */
+.landing-container {
     background-size: 100% auto;
     background: url('./images/landing-image-full.png') no-repeat center center;
     -webkit-background-size: cover;
@@ -52,45 +63,51 @@ body{
     padding: 130px;
 }
 
-.landing-middle{
-    padding: 5%; 
+.landing-middle {
+    padding: 5%;
 }
 
-.landing-images{
+.landing-images {
     width: 100%;
     height: auto;
     object-fit: contain;
 }
-.landing-text{
+
+.landing-text {
     color: var(--secondary-color);
 }
 
-.signup-btn{
+/* ------ sign up page ------ */
+.signup-btn {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+/* ------ cards components ------ */
 .flashcard-container {
-    height: 500px; 
+    height: 500px;
 }
-.flashcard{
+
+.flashcard {
     height: 300px;
 }
-.flashcard-text{
+
+.flashcard-text {
     color: var(--primary-color);
     margin-top: 25%;
     display: flex;
     justify-content: center;
 }
 
-.card-page-text{
+.card-page-text {
     color: var(--primary-color);
-   
+
     display: flex;
     justify-content: center;
 }
 
-.modal-text{
+.modal-text {
     color: var(--primary-color);
     font-family: 'Bungee', cursive;
     font-size: 20px;
