@@ -82,7 +82,7 @@ body {
     align-items: center;
 }
 
-/* ------ cards components ------ */
+/* ------ study page components ------ */
 .flashcard-container {
     height: 500px;
 }
@@ -98,11 +98,7 @@ body {
     justify-content: center;
 }
 
-.card-page-text {
-    /* color: var(--primary-color); */
-    display: flex;
-    justify-content: center;
-}
+/* ------ modal ------ */
 
 .modal-text {
     color: var(--primary-color);
@@ -110,10 +106,7 @@ body {
     font-size: 20px;
 }
 
-.footer{
-  bottom: 0;
-  width: 100%;
-}
+/* ------ deck components ------ */
 .deck{
     margin-left: 30px;    
 }
@@ -127,11 +120,22 @@ body {
 .deck-btn{
     text-decoration: none;
 }
+/* ------ card components ------ */
 .new-card-text{
     margin-top: 130px;
+}
+.card-page-text {
+    /* color: var(--primary-color); */
+    display: flex;
+    justify-content: center;
 }
 #study-btn{
     margin: 10px;
     display: flex;
     justify-content: center;
+}
+/* ------ footer component ------ */
+.footer{
+  bottom: 0;
+  width: 100%;
 }
