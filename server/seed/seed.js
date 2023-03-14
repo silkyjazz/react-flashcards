@@ -1,38 +1,32 @@
 const { faker } = require("@faker-js/faker");
 const { User, Deck, Card } = require("../models");
 const connection = require('../config/connection');
-const { isCompositeType } = require("graphql");
+const bcrypt = require("bcrypt");
 
 const randomUser = (users) => {
   let index = Math.floor(Math.random() * users.length);
   return index;
 };
 
-const seedingUsers = (numberOfUsers) => {
+const generatePassword = async () => {
+  const saltRounds = 10;
+  const password = await bcrypt.hash("password123", saltRounds);
+  return password;
+};
+
+const seedingUsers = async (numberOfUsers) => {
   let result = [];
   for (let i = 0; i < numberOfUsers; i++) {
     const user = new User({
       username: faker.internet.userName(),
       email: faker.internet.email(),
-      password: "password123",
+      password: await generatePassword(),
       decks: [],
     });
     result.push(user);
   }
   return result;
 };
-
-// if card is subdocument of deck use this instead
-// const seedCards = (numOfCards) => {
-//     const cards = [];
-//     for (let i = 0; i < numOfCards; i++) {
-//       cards.push({
-//         question: faker.lorem.sentence(),
-//         answer: faker.lorem.words(),
-//       });
-//     }
-//     return cards;
-//   };
 
 const seedingCards = (numOfCards) => {
     // Generate random cards
@@ -70,7 +64,7 @@ connection.once("open", async () => {
   await Card.deleteMany({});
   
   // Generate random users
-  const seedUsers = seedingUsers(2);
+  const seedUsers = await seedingUsers(2);
   const seedDecks = seedingDecks(seedUsers, 3);
   const seedCards = seedingCards(21);
 
@@ -94,6 +88,9 @@ seedUsers
   const createdUsers = await User.collection.insertMany(seedUsers);
   const createdDecks = await Deck.collection.insertMany(seedDecks);
   const createdCards = await Card.collection.insertMany(seedCards);
+  seedUsers.forEach((user) => {
+    console.log("information for each users are" + '\nusername - ' + user.username + " \nemail - " + user.email + " \npassword - password123")
+  })
   console.log("Seed data generated and saved to the database");
   process.exit(0)
 });

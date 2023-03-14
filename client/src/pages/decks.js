@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { QUERY_DECKS } from "../utils/query";
-import { UPDATE_DECK, DELETE_DECK } from "../utils/mutation";
+import { UPDATE_DECK, DELETE_DECK, CREATE_DECK } from "../utils/mutation";
 import DeckList from "../components/DeckList";
 import { Card, Modal, Button, Row, Col } from "react-bootstrap";
 import CreateDeckForm from "../components/CreateDeckForm";
@@ -12,10 +12,14 @@ const Decks = () => {
   const { loading, data } = useQuery(QUERY_DECKS, {
     variables: { username: usernameParam },
   });
+  
+
+
   const [showModal, setShowModal] = useState(false);
 
   const handleModalClose = () => setShowModal(false);
   const handleCardClick = () => setShowModal(true);
+
   const decks = data?.findAllDecks || {};
 
   if (loading) {
