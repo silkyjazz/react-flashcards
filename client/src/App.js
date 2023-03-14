@@ -49,7 +49,7 @@ function App() {
             {/* get decks by user ID */}
             <Route path="/:username/decks" element={<Decks />} />
 
-            <Route path="/:username/createDeck" element={<Create />} />
+            {/* <Route path="/:username/createDeck" element={<Create />} /> */}
             {/* get cards by deck ID */}
             {/* card modification using modal instead of a new page */}
             <Route path="/:deckId/cards" element={<Cards />} />
