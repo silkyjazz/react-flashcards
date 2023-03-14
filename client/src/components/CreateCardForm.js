@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import React from 'react';
 
-import { QUERY_CARD, QUERY_DECK } from "../utils/query";
-import { DELETE_CARD, UPDATE_CARD, CREATE_CARD } from "../utils/mutation";
 
-import { Card, Modal, Button, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 
 // import Auth from '../../utils/auth';
 
-const CreateCardForm = () => {
+const CreateCardForm = ({question, answer}) => {
     // const [username, setUsername] = useState({
     //         _id: "",
     //         question: "",
@@ -56,19 +52,35 @@ const CreateCardForm = () => {
     //               console.error(err);
     //             }
     //           };
+
+    
+    function handleQuestionChange(e) {
+       question(e.target.value)
+    }
+
+    function handleAnswerChange(e) {
+       answer(e.target.value)
+    }
+
+  
+
+
     return (
         <div>
 
             <>
+           
                 <Form.Group className="mb-3" controlId="cardQ">
                     <Form.Label className='modal-text text-center' htmlFor="question">Question</Form.Label>        
-                    <Form.Control as="textarea" rows={1} />
+                    <Form.Control as="textarea" onChange={handleQuestionChange} rows={1} />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="cardA">
                     <Form.Label className='modal-text text-center' htmlFor="answer">Answer</Form.Label>        
-                    <Form.Control as="textarea" rows={2} />
+                    <Form.Control as="textarea" onChange={handleAnswerChange} rows={2} />
                 </Form.Group>    
+         
+
         
             </>
 

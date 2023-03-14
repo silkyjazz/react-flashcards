@@ -4,7 +4,8 @@ import { useMutation, useQuery } from "@apollo/client";
 import { QUERY_DECK } from "../utils/query";
 import { CREATE_DECK } from "../utils/mutation";
 import { Card, Modal, Button, Row, Col } from "react-bootstrap";
-import AddCardModal from "../components/CreateCardModal";
+import CreateCardForm from "../components/CreateCardForm";
+
 
 const ACTIONS = {
   NEW_CARD: "new-card",
@@ -31,10 +32,25 @@ const Create = () => {
   const { loading, data } = useQuery(QUERY_DECK);
 
   const [formData, setFormData] = useState({
-    deck_name: "",
+    deck_name: "nerd",
     question: "",
     answer: "",
   });
+  
+  function handleQuestionsChange(e) {
+    setFormData({
+        ...formData,
+        question: e
+    })
+  }
+
+  function handleAnswersChange(e) {
+    setFormData({
+        ...formData,
+        answer: e
+    })
+  }
+
   let navigate = useNavigate();
 
   const [makeDeck, { error }] = useMutation(CREATE_DECK);
@@ -44,28 +60,30 @@ const Create = () => {
   const handleModalClose = () => setShowModal(false);
   const handleCardClick = () => setShowModal(true);
 
+  
   const handleFormSubmit = async (event) => {
+      console.log(formData);
     event.preventDefault();
-
     dispatch({ type: ACTIONS.NEW_CARD, payload: { formData: formData } });
 
     try {
+        console.log('test2')
       const { data } = await makeDeck({
-        variables: { ...formData },
+        variables: { username: formData.deck_name, name:formData.answer },
+        
       });
-
-      navigate(`/:${data.user._id}/decks`);
+      
+      navigate(`/decks`);
     } catch (err) {
       console.log(err);
     }
-
+    console.log('test2')
     setFormData({
       deck_name: "",
       question: "",
       answer: "",
     });
 
-    console.log(formData);
   };
 
   return (
@@ -77,7 +95,7 @@ const Create = () => {
         {loading ? (
           <div>Loading...</div>
         ) : (
-          <form onSubmit={handleFormSubmit}>
+          <form >
             <div className="create-form text-center">
               <div>
                 <label>Deck Name: </label>
@@ -113,14 +131,14 @@ const Create = () => {
         </Modal.Header>
 
         <Modal.Body id="contained-modal-title-vcenter">
-          <AddCardModal />
+          <CreateCardForm question={handleQuestionsChange} answer={handleAnswersChange}/>
         </Modal.Body>
 
         <Modal.Footer>
           <Button variant="secondary" onClick={handleModalClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleModalClose}>
+          <Button type="submit" variant="primary" onClick={handleFormSubmit}>
             Save changes
           </Button>
         </Modal.Footer>

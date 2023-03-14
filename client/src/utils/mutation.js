@@ -3,7 +3,6 @@ import { gql } from "@apollo/client";
 export const CREATE_DECK = gql`
   mutation createDeck($username: String!, $name: String!) {
     createDeck(username: $username, name: $name) {
-      _id
       username
       name
     }
