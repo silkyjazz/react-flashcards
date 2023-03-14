@@ -66,7 +66,7 @@ function App() {
           <Route exact path='/' element={<Home/>} />
           {/* <Route  path={`/${window.login.user.username}/decks`} component={<Decks/>} /> */}
           <Route path='/create' element={<Create/>} />
-          <Route exact path='/study' element={<Study/>} />
+          {/* <Route exact path='/study' element={<Study />} /> */}
           {/* <Route exact path='/:deckId/cards' component={<Cards/>} /> */}
           <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
         </Routes>
