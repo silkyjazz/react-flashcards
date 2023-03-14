@@ -7,27 +7,27 @@ import { Card, Modal, Button, Row, Col } from "react-bootstrap";
 import CreateCardForm from "../components/CreateCardForm";
 
 
-const ACTIONS = {
-  NEW_CARD: "new-card",
-  DELETE_CARD: "delete-card",
-};
+// const ACTIONS = {
+//   NEW_CARD: "new-card",
+//   DELETE_CARD: "delete-card",
+// };
 
-function reducer(newCard, action) {
-  switch (action.type) {
-    case ACTIONS.NEW_CARD:
-      return [...newCard, newCards(action.payload.formData)];
-    case ACTIONS.DELETE_CARD:
-      return;
-    default:
-  }
-}
+// function reducer(newCard, action) {
+//   switch (action.type) {
+//     case ACTIONS.NEW_CARD:
+//       return [...newCard, newCards(action.payload.formData)];
+//     case ACTIONS.DELETE_CARD:
+//       return;
+//     default:
+//   }
+// }
 
-function newCards(formData) {
-  return { id: Date.now(), formData: formData };
-}
+// function newCards(formData) {
+//   return { id: Date.now(), formData: formData };
+// }
 
 const Create = () => {
-  const [cards, dispatch] = useReducer(reducer, []);
+//   const [cards, dispatch] = useReducer(reducer, []);
 
   const { loading, data } = useQuery(QUERY_DECK);
 
@@ -64,7 +64,7 @@ const Create = () => {
   const handleFormSubmit = async (event) => {
       console.log(formData);
     event.preventDefault();
-    dispatch({ type: ACTIONS.NEW_CARD, payload: { formData: formData } });
+    // dispatch({ type: ACTIONS.NEW_CARD, payload: { formData: formData } });
 
     try {
         console.log('test2')
@@ -145,6 +145,8 @@ const Create = () => {
       </Modal>
             </div>
           </form>
+
+
         )}
         <Button
           variant="secondary"
