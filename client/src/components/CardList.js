@@ -1,17 +1,12 @@
+import { Card, Modal, Button, Row, Col } from "react-bootstrap";
 
+const CardList = ({card}) => {
+  return (
+    <Card className="text-center" style={{ width: "25rem" }}>
+        <Card.Text className="flashcard-text">{card.question} </Card.Text>
+        <Card.Text className="flashcard-text">{card.answer} </Card.Text>
+    </Card>
+  );
+};
 
-
-
-// const CardList = ({
-//     questions,
-// }) => {
-//     if (!cards.length) {
-//         return <h3>No Cards Yet</h3>;
-//     }
-
-//     return (
-
-//     );
-// };
-
-// export default CardList;
+export default CardList;
