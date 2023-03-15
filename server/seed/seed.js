@@ -69,9 +69,9 @@ connection.once("open", async () => {
   await Card.deleteMany({});
 
   // seedingUsers(numberOfUsers), seedingDecks(seededUserData, numberOfDecks), seedingCards(numberOfCards)
-  const seedUsers = await seedingUsers(2);
-  const seedDecks = seedingDecks(seedUsers, 3);
-  const seedCards = seedingCards(21);
+  const seedUsers = await seedingUsers(3);
+  const seedDecks = seedingDecks(seedUsers, 6);
+  const seedCards = seedingCards(45);
 
   // assigning decks to random user
   for (let i = 0; i < seedUsers.length; i++) {
@@ -86,12 +86,13 @@ connection.once("open", async () => {
   for (let i = 0; i < seedCards.length; i++) {
     const randomDeckIndex = Math.floor(Math.random() * seedDecks.length);
     const cardId = seedCards[i]._id;
+    seedCards[i].deckId = seedDecks[randomDeckIndex]._id
     seedDecks[randomDeckIndex].cards.push(cardId);
   }
 
-  //   console.log("=============USER DATA================\n", ...users);
-  //   console.log("=============DECK DATA================\n", ...decks);
-  //   console.log("=============CARD DATA================\n", ...cards);
+  //   console.log("=============USER DATA================\n", ...seedUsers);
+  //   console.log("=============DECK DATA================\n", ...seedDecks);
+    console.log("=============CARD DATA================\n", ...seedCards);
   // insert into data base
   const createdUsers = await User.collection.insertMany(seedUsers);
   const createdDecks = await Deck.collection.insertMany(seedDecks);
