@@ -23,6 +23,7 @@ const Decks = () => {
   const decks = data?.findAllDecks || {};
 
   if (loading) {
+  console.log(usernameParam)
     return <div>Loading...</div>;
   }
 
@@ -49,14 +50,14 @@ const Decks = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <CreateDeckForm />
         {/* modal card */}
         <Modal.Header closeButton>
           <Modal.Title className="modal-Text">Create New Deck</Modal.Title>
         </Modal.Header>
 
         <Modal.Body id="contained-title-vcenter">
-          <CreateDeckForm />
+          <CreateDeckForm 
+          username={usernameParam}/>
         </Modal.Body>
         
         {/* <Modal.Footer>
