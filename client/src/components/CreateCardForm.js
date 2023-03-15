@@ -13,14 +13,15 @@ const CreateCardForm = ({ deckParam }) => {
         e.preventDefault()
         console.log(deckParam)
         try {
-            console.log(questionBody)
-            console.log(answerBody)
+            // console.log(questionBody)
+            // console.log(answerBody)
             const {data} = await createCard({
                 variables: { deckId: deckParam, question: questionBody, answer: answerBody },
             })
-            console.log(questionBody)
-            console.log(answerBody)
-
+            // console.log(questionBody)
+            // console.log(answerBody)
+            window.location.reload()
+            // window.location.assign(`/cards`)
             setQuestionBody('')
             setAnswerBody('')
         } catch (error) {

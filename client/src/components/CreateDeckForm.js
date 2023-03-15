@@ -15,7 +15,9 @@ const CreateDeckForm = ({username}) => {
                 variables: { username: username, name: deckName },
             })
             console.log(username)
-
+            debugger
+            // window.location.assign(`${username}/decks`)
+            window.location.reload()
             setDeckName('')
         } catch (err) {
             console.error(err)
