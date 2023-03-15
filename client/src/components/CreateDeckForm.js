@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import { Form, Button, Modal } from "react-bootstrap";
 import { CREATE_DECK } from "../utils/mutation";
 import { useMutation } from "@apollo/client";
-// import { QUERY_USER, QUERY_DECKS } from "../utils/query";
-// import { Modal, Button } from "bootstrap";
 
 const CreateDeckForm = ({username}) => {
     const [deckName, setDeckName] = useState('')
     const [createDeck, {error}] = useMutation(CREATE_DECK)
-    console.log(username+ '-------------------')
     const handleFormSubmit = async (e) => {
         e.preventDefault()
 

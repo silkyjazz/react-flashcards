@@ -3,17 +3,31 @@ import { Card } from "react-bootstrap";
 import { Navbar, Nav, Container, Modal, Button, Form } from "react-bootstrap";
 
 const CardList = ({ card }) => {
-  const [show, setShow] = useState(false);
+  const [showMondal, setShowModal] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
+  //Sets the state to false so the question text will render on the card
+  const [showAnswer, setShowAnswer] = useState(false);
+  //Event listener that will display the answer on click
+  const handleCardClick = () => {
+    setShowAnswer(!showAnswer);
+  };
+
+  //Checks the state to render question OR answer
+  const display = showAnswer ? card.answer : card.question;
 
   return (
     <>
       <div>
-        <Card className="text-center" style={{ height: "300px" }}>
-          <Card.Text className="flashcard-text">{card.question} </Card.Text>
-          <Card.Text className="flashcard-text">{card.answer} </Card.Text>
+        <Card
+          className="text-center"
+          style={{ height: "300px" }}
+          onClick={handleCardClick}
+        >
+          {/* changing the state of the card text */}
+          <Card.Text className="flashcard-text">{display} </Card.Text>
         </Card>
         <Button
           variant="secondary"
@@ -24,12 +38,12 @@ const CardList = ({ card }) => {
           Update
         </Button>
         {/* //    <Button variant="secondary" onClick={handleShowLogin} style={{ backgroundColor: '#3F497F' }}  className="btn">
-    //      Sign Up
+    //      Delete
     //    </Button> */}
       </div>
 
       <Modal
-        show={show}
+        show={showMondal}
         onHide={handleClose}
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -62,7 +76,6 @@ const CardList = ({ card }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-
     </>
   );
 };

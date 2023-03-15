@@ -7,6 +7,7 @@ import DeckList from "../components/DeckList";
 import { Container, Card, Modal, Button, Row, Col } from "react-bootstrap";
 import CreateDeckForm from "../components/CreateDeckForm";
 
+
 const Decks = () => {
   const { username: usernameParam } = useParams();
   const { loading, data } = useQuery(QUERY_DECKS, {
@@ -23,7 +24,6 @@ const Decks = () => {
   const decks = data?.findAllDecks || {};
 
   if (loading) {
-  console.log(usernameParam)
     return <div>Loading...</div>;
   }
 

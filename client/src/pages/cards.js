@@ -23,14 +23,19 @@ function CardWithModal() {
   // Get all cards from DB
   const { deckId: deckParam } = useParams();
   const { loading, data } = useQuery(QUERY_DECK, {
-    variables: { _id: deckParam },
+    variables: { 
+      _id: deckParam,
+    },
   });
 
   // Create/ update/ delete
 
   const study = (event) => {
     event.preventDefault();
-    window.location.assign(`/${deckParam}/study`);
+  const deckId = data?.findSingleDeck._id;
+    if (deckParam) {
+      window.location.assign(`/${deckParam}/study`);
+    }
   };
 
   const cards = data?.findSingleDeck.cards || [];
@@ -39,7 +44,8 @@ function CardWithModal() {
   if (loading) {
     return <h1>Loading...</h1>;
   }
-
+  console.log(deckParam)
+  console.log(data)
   return (
     <>
       {/* title for the page */}
@@ -92,16 +98,11 @@ function CardWithModal() {
           <Modal.Title className="modal-text ">Create New Card</Modal.Title>
         </Modal.Header>
         <Modal.Body id="contained-modal-title-vcenter">
-          <CreateCardForm />
+          <CreateCardForm 
+          deckParam={deckParam}
+          />
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleModalClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleModalClose}>
-            Save changes
-          </Button>
-        </Modal.Footer>
+       
       </Modal>
     </>
   );

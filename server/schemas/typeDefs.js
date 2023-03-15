@@ -3,6 +3,7 @@ const { gql } = require("apollo-server-express");
 const typeDefs = gql`
     type Card {
         _id: ID
+        deckId: ID
         question: String
         answer: String
     }
