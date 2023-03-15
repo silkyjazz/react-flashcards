@@ -1,6 +1,6 @@
 const { faker } = require("@faker-js/faker");
 const { User, Deck, Card } = require("../models");
-const connection = require('../config/connection');
+const connection = require("../config/connection");
 const bcrypt = require("bcrypt");
 
 const randomUser = (users) => {
@@ -8,12 +8,14 @@ const randomUser = (users) => {
   return index;
 };
 
+// without hashing the password, it wouldn't work with login when it tried to decode
 const generatePassword = async () => {
   const saltRounds = 10;
   const password = await bcrypt.hash("password123", saltRounds);
   return password;
 };
 
+// creating fake users
 const seedingUsers = async (numberOfUsers) => {
   let result = [];
   for (let i = 0; i < numberOfUsers; i++) {
@@ -28,19 +30,21 @@ const seedingUsers = async (numberOfUsers) => {
   return result;
 };
 
+// creating fake cards
 const seedingCards = (numOfCards) => {
-    // Generate random cards
-    const result = [];
-    for (let i = 0; i < numOfCards; i++) {
-      const card = new Card({
-        question: faker.lorem.sentence(),
-        answer: faker.lorem.words(),
-      })
-      result.push(card);
-    }
-    return result;
-  };
+  // Generate random cards
+  const result = [];
+  for (let i = 0; i < numOfCards; i++) {
+    const card = new Card({
+      question: faker.lorem.sentence(),
+      answer: faker.lorem.words(),
+    });
+    result.push(card);
+  }
+  return result;
+};
 
+// creating fake decks
 const seedingDecks = (usersArray, numOfDecks) => {
   let result = [];
   for (let i = 0; i < numOfDecks; i++) {
@@ -50,10 +54,11 @@ const seedingDecks = (usersArray, numOfDecks) => {
       cards: [],
     });
     result.push(deck);
-  } 
+  }
   return result;
 };
 
+// connection to mongoDB
 connection.on("error", (err) => console.error(err));
 connection.once("open", async () => {
   console.log("connected to MongoDB connection");
@@ -62,35 +67,44 @@ connection.once("open", async () => {
   await User.deleteMany({});
   await Deck.deleteMany({});
   await Card.deleteMany({});
-  
-  // Generate random users
+
+  // seedingUsers(numberOfUsers), seedingDecks(seededUserData, numberOfDecks), seedingCards(numberOfCards)
   const seedUsers = await seedingUsers(2);
   const seedDecks = seedingDecks(seedUsers, 3);
   const seedCards = seedingCards(21);
 
-
+  // assigning decks to random user
   for (let i = 0; i < seedUsers.length; i++) {
-    for ( let k = 0; k < seedDecks.length; k++) {
+    for (let k = 0; k < seedDecks.length; k++) {
       if (seedDecks[k].username === seedUsers[i].username) {
-        seedUsers[i].decks.push(seedDecks[k])
+        seedUsers[i].decks.push(seedDecks[k]);
       }
     }
   }
 
+  // assigning cards to random deck
   for (let i = 0; i < seedCards.length; i++) {
     const randomDeckIndex = Math.floor(Math.random() * seedDecks.length);
     const cardId = seedCards[i]._id;
-    seedDecks[randomDeckIndex].cards.push(cardId)
+    seedDecks[randomDeckIndex].cards.push(cardId);
   }
-seedUsers
-//   console.log("========================\n", ...users);
-//   console.log("========================\n", ...decks);
+
+  //   console.log("=============USER DATA================\n", ...users);
+  //   console.log("=============DECK DATA================\n", ...decks);
+  //   console.log("=============CARD DATA================\n", ...cards);
+  // insert into data base
   const createdUsers = await User.collection.insertMany(seedUsers);
   const createdDecks = await Deck.collection.insertMany(seedDecks);
   const createdCards = await Card.collection.insertMany(seedCards);
   seedUsers.forEach((user) => {
-    console.log("information for each users are" + '\nusername - ' + user.username + " \nemail - " + user.email + " \npassword - password123")
-  })
+    console.log(
+      "\nusername - " +
+        user.username +
+        " \nemail - " +
+        user.email +
+        " \npassword - password123\n"
+    );
+  });
   console.log("Seed data generated and saved to the database");
-  process.exit(0)
+  process.exit(0);
 });

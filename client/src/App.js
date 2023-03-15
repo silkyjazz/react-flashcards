@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import React, { useState } from "react";
+import React from "react";
 import {
   ApolloClient,
   InMemoryCache,
@@ -15,16 +15,14 @@ import Study from "./pages/study";
 import Cards from "./pages/cards";
 import Decks from "./pages/decks";
 
-
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
   const token = localStorage.getItem("id_token");
   // return the headers to the context so httpLink can read them
-  console.log("======= line 27 app.js ===headers has===", headers)
+  // console.log("======= line 27 app.js ===headers has===", headers)
   return {
     headers: {
       ...headers,
@@ -46,10 +44,10 @@ function App() {
           <Navbar />
           <Routes>
             <Route exact path="/" element={<Home />} />
+
             {/* get decks by user ID */}
             <Route path="/:username/decks" element={<Decks />} />
 
-            {/* <Route path="/:username/createDeck" element={<Create />} /> */}
             {/* get cards by deck ID */}
             {/* card modification using modal instead of a new page */}
             <Route path="/:deckId/cards" element={<Cards />} />
