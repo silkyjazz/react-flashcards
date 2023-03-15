@@ -3,22 +3,28 @@ import { Form, Modal, Button } from "react-bootstrap";
 import { CREATE_CARD } from "../utils/mutation";
 import { useMutation } from '@apollo/client'
 
-const CreateCardForm = ({ deckId }) => {
+const CreateCardForm = ({ deckParam }) => {
     const [questionBody, setQuestionBody] = useState('')
     const [answerBody, setAnswerBody] = useState('')
     const [createCard, {error}] = useMutation(CREATE_CARD)
 
+    
     const handleFormSubmit = async (e) => {
         e.preventDefault()
-
+        console.log(deckParam)
         try {
+            console.log(questionBody)
+            console.log(answerBody)
             const {data} = await createCard({
-                variables: { deckId: deckId, question: questionBody, answer: answerBody}
+                variables: { deckId: deckParam, question: questionBody, answer: answerBody },
             })
+            console.log(questionBody)
+            console.log(answerBody)
+
             setQuestionBody('')
             setAnswerBody('')
-        } catch (err) {
-            console.log(err)
+        } catch (error) {
+            console.log(JSON.stringify(error, null, 2))
         }
     }
 

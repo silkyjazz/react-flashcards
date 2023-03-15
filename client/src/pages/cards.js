@@ -23,7 +23,9 @@ function CardWithModal() {
   // Get all cards from DB
   const { deckId: deckParam } = useParams();
   const { loading, data } = useQuery(QUERY_DECK, {
-    variables: { _id: deckParam },
+    variables: { 
+      deckId: deckParam,
+    },
   });
 
   // Create/ update/ delete
@@ -94,7 +96,8 @@ function CardWithModal() {
         </Modal.Header>
         <Modal.Body id="contained-modal-title-vcenter">
           <CreateCardForm 
-          deckId={deckParam}/>
+          deckParam={deckParam}
+          />
         </Modal.Body>
         {/* <Modal.Footer>
           <Button variant="secondary" onClick={handleModalClose}>
