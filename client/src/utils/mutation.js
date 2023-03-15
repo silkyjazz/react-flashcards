@@ -3,6 +3,7 @@ import { gql } from "@apollo/client";
 export const CREATE_DECK = gql`
   mutation createDeck($username: String!, $name: String!) {
     createDeck(username: $username, name: $name) {
+      _id
       username
       name
     }
@@ -12,7 +13,7 @@ export const CREATE_DECK = gql`
 export const CREATE_CARD = gql`
   mutation CreateCard($deckId: ID!, $question: String!, $answer: String!) {
     createCard(deckId: $deckId, question: $question, answer: $answer) {
-      deckId
+      _id
       question
       answer
     }
