@@ -19,6 +19,7 @@ const Decks = () => {
   const handleModalClose = () => setShowModal(false);
   const handleCardClick = () => setShowModal(true);
 
+
   const decks = data?.findAllDecks || {};
 
   if (loading) {
@@ -58,14 +59,14 @@ const Decks = () => {
           <CreateDeckForm />
         </Modal.Body>
         
-        <Modal.Footer>
+        {/* <Modal.Footer>
           <Button variant="secondary" onClick={handleModalClose}>
             Close
           </Button>
-          <Button type="submit" variant="primary" onClick={handleModalClose}>
+          <Button type="submit" variant="primary" onClick={handleFormSubmit}>
             Save changes
           </Button>
-        </Modal.Footer>
+        </Modal.Footer> */}
       </Modal>
       {/* list of our decks */}
       {decks.map((deck, index) => (

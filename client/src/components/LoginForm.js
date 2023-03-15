@@ -25,19 +25,21 @@ const LoginForm = () => {
       event.preventDefault();
       event.stopPropagation();
     }
-    if (error) {
-      console.error('error from line 29 loginForm.js' + error)
-    }
+
 
     try {
       
       const { data } = await login({
         variables: { ...formState },
       });
-
+      console.log('line 35----------------- loginform.js')
+      console.log(data.login)
       const user = data.login.user.username
+      console.log(user)
       Auth.login(data.login.token);
+     
       window.location.assign(`/${user}/decks`)
+      
     } catch (error) {
       console.error(error);
     }

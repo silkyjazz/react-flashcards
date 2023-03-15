@@ -1,43 +1,23 @@
 import React, { useState } from "react";
-import { Form } from "react-bootstrap";
+import { Form, Button, Modal } from "react-bootstrap";
 import { CREATE_DECK } from "../utils/mutation";
 import { useMutation } from "@apollo/client";
-import { QUERY_USER, QUERY_DECKS } from "../utils/query";
-import { Modal, Button } from "bootstrap";
+// import { QUERY_USER, QUERY_DECKS } from "../utils/query";
+// import { Modal, Button } from "bootstrap";
 
 const CreateDeckForm = () => {
     const [deckName, setDeckName] = useState('')
-    const [createDeck, {error}] = useMutation(CREATE_DECK, {
-        
-        update(cache, { data: { createDeck } }) {
-            try {
-                const { decks } = cache.readQuery({ query: QUERY_DECKS})
 
-                cache.writeQuery({
-                    query: QUERY_DECKS,
-                    data: { deckName: [createDeck, ...decks]}
-                })
-            } catch (e) {
-                console.error(e)
-            }
-
-            const { user } = cache.readQuery({ query: QUERY_USER })
-            cache.writeQuery({
-                query: QUERY_USER,
-                data: { user: { ...user, decks: [...user.decks, createDeck]}}
-            })
-        }
-
-    })
+    const [createDeck, {error}] = useMutation(CREATE_DECK)
 
     const handleFormSubmit = async (e) => {
         e.preventDefault()
 
         try {
+            console.log(deckName)
             const { data } = await createDeck({
-                variables: { deckName },
+                variables: { username: `username`, name: deckName },
             })
-
             setDeckName('')
         } catch (err) {
             console.error(err)
@@ -45,8 +25,9 @@ const CreateDeckForm = () => {
     }
 
     const handleChange = (e) => {
+        console.log(e)
         const { name, value } = e.target
-
+        console.log(name, value)
         if (name === "deckName" && value.length <= 30) {
             setDeckName(value)
         }
@@ -65,7 +46,7 @@ const CreateDeckForm = () => {
         </Form.Label>
         <Form.Control as="textarea" name="deckName" onChange={handleChange} rows={1} />
       </Form.Group>
-      {/* </Modal.Body>
+      {/* </Modal.Body> */}
       <Modal.Footer>
           <Button variant="secondary" >
             Close
@@ -73,7 +54,7 @@ const CreateDeckForm = () => {
           <Button type="submit" variant="primary" onClick={handleFormSubmit}>
             Save changes
           </Button>
-        </Modal.Footer> */}
+        </Modal.Footer>
     </div>
   );
 };
