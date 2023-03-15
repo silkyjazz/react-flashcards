@@ -8,6 +8,14 @@ import { useParams } from "react-router-dom";
 function Study({deckId}) {
 
   const [flipped, setFlipped] = useState(false);
+
+  //Get all cards by deck ID
+  //Display question
+  //Show answer on click
+  //Click through array of cards
+  //Shuffle deck
+
+
   const { deckId: deckParam } = useParams();
 
   const { loading, data, error } = useQuery(QUERY_DECK, {
@@ -64,7 +72,6 @@ function Study({deckId}) {
             <Button
               variant="secondary"
               style={{ backgroundColor: "#F7C04A" }}
-              // className="mr-2"
               onClick={handlePrev}
             >
               Previous
