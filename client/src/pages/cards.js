@@ -24,7 +24,7 @@ function CardWithModal() {
   const { deckId: deckParam } = useParams();
   const { loading, data } = useQuery(QUERY_DECK, {
     variables: { 
-      deckId: deckParam,
+      _id: deckParam,
     },
   });
 
@@ -41,7 +41,8 @@ function CardWithModal() {
   if (loading) {
     return <h1>Loading...</h1>;
   }
-
+  console.log(deckParam)
+  console.log(data)
   return (
     <>
       {/* title for the page */}
@@ -99,14 +100,7 @@ function CardWithModal() {
           deckParam={deckParam}
           />
         </Modal.Body>
-        {/* <Modal.Footer>
-          <Button variant="secondary" onClick={handleModalClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleModalClose}>
-            Save changes
-          </Button>
-        </Modal.Footer> */}
+       
       </Modal>
     </>
   );
