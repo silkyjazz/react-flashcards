@@ -4,15 +4,15 @@ const mongoose = require('mongoose')
 
 
 const cardSchema = new Schema({
+    deckId: {
+        type: String,
+        required: true
+    },
     question: {
         type: String,
         require: true,
         maxLength: 255
     },
-    // choices:{
-    //     type: [String],
-    //     require: true
-    // },
     answer: {
         type: String,
         require: true

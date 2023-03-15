@@ -1,12 +1,18 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Card } from "react-bootstrap";
 import { Navbar, Nav, Container, Modal, Button, Form } from "react-bootstrap";
+// import { UPDATE_CARD } from "../utils/mutation";
+// import { useMutation } from "@apollo/client";
 
-const CardList = ({ card }) => {
-  const [showMondal, setShowModal] = useState(false);
+import { DeleteCardForm } from "./DeleteCardForm";
 
+const CardList = ({ deckParam, card }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [showDeleteMondal, setShowDeleteModal] = useState(false);
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
+  const handleDeleteClose = () => setShowDeleteModal(false);
+  const handleDeleteShow = () => setShowDeleteModal(true);
 
   //Sets the state to false so the question text will render on the card
   const [showAnswer, setShowAnswer] = useState(false);
@@ -14,9 +20,9 @@ const CardList = ({ card }) => {
   const handleCardClick = () => {
     setShowAnswer(!showAnswer);
   };
-
   //Checks the state to render question OR answer
   const display = showAnswer ? card.answer : card.question;
+  const cardId = card._id;
 
   return (
     <>
@@ -29,22 +35,29 @@ const CardList = ({ card }) => {
           {/* changing the state of the card text */}
           <Card.Text className="flashcard-text">{display} </Card.Text>
         </Card>
+
         <Button
           variant="secondary"
-          onClick={handleShow}
+          onClick={handleDeleteShow}
           style={{ backgroundColor: "#F7C04A" }}
           className="btn"
         >
           Update
         </Button>
-        {/* //    <Button variant="secondary" onClick={handleShowLogin} style={{ backgroundColor: '#3F497F' }}  className="btn">
-    //      Delete
-    //    </Button> */}
+
+        <Button
+          variant="danger"
+          onClick={handleShow}
+          className="btn"
+        >
+          Delete
+        </Button>
       </div>
 
+      {/* update modal */}
       <Modal
-        show={showMondal}
-        onHide={handleClose}
+        show={showDeleteMondal}
+        onHide={handleDeleteClose}
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -71,10 +84,20 @@ const CardList = ({ card }) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
+          {/*TODO: use handleSubmit for updating */}
           <Button variant="primary" onClick={handleClose}>
             Save Update
           </Button>
         </Modal.Footer>
+      </Modal>
+
+      <Modal
+        show={showModal}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <DeleteCardForm deckParam={deckParam} cardId={cardId}/>
       </Modal>
     </>
   );
