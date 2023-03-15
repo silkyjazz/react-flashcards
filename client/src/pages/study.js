@@ -2,21 +2,32 @@ import React, { useState, useEffect } from "react";
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import {useQuery} from '@apollo/client';
 import {QUERY_DECK} from '../utils/query';
+import { useParams } from "react-router-dom";
 
-// const deckId='6410bf0ced9d1fd11327a177';
 
 function Study({deckId}) {
 
   const [flipped, setFlipped] = useState(false);
-  const { loading, error, data } = useQuery(QUERY_DECK, {
-    variables: {deckId},
+
+  //Get all cards by deck ID
+  //Display question
+  //Show answer on click
+  //Click through array of cards
+  //Shuffle deck
+
+
+  const { deckId: deckParam } = useParams();
+
+  const { loading, data, error } = useQuery(QUERY_DECK, {
+    variables: { _id: deckParam },
   });
+
   const [cards, setCards] = useState([])
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(()=>{
     if(data){
-      const shuffledCards = data.queryDeck.cards.sort(() => Math.random() - 0.5);
+      const shuffledCards = data.findSingleDeck.cards.sort(() => Math.random() - 0.5);
       setCards(shuffledCards);
     }
   }, [data]);
@@ -51,9 +62,8 @@ function Study({deckId}) {
           <Card onClick={handleClick}>
             <Card.Body className={`flashcard ${flipped ? "flipped" : ""}`}>
               <Card.Text className="flashcard-text front">
-              {flipped ? currentCard.answer : currentCard.question}
+              {flipped ? currentCard.findSingleDeckanswer : currentCard.findSingleDeck.question}
               </Card.Text>
-             
             </Card.Body>
           </Card>
         </Col>
@@ -62,7 +72,6 @@ function Study({deckId}) {
             <Button
               variant="secondary"
               style={{ backgroundColor: "#F7C04A" }}
-              // className="mr-2"
               onClick={handlePrev}
             >
               Previous
