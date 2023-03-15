@@ -49,7 +49,6 @@ const Decks = () => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        <CreateDeckForm />
         {/* modal card */}
         <Modal.Header closeButton>
           <Modal.Title className="modal-Text">Create New Deck</Modal.Title>

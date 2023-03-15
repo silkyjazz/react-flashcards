@@ -87,8 +87,7 @@ function CardWithModal() {
         show={showModal}
         onHide={handleModalClose}
         aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
+        centered>
         <Modal.Header closeButton>
           <Modal.Title className="modal-text ">Create New Card</Modal.Title>
         </Modal.Header>
