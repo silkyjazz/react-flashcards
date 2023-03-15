@@ -32,7 +32,7 @@ const CreateCardForm = ({ deckParam }) => {
         }
 
     }
-  };
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,7 +47,7 @@ const CreateCardForm = ({ deckParam }) => {
   return (
     <div>
       <>
-        <Form.Group className="mb-3" controlId="cardQ">
+        <Form.Group className="mb-3" >
           <Form.Label className="modal-text text-center" htmlFor="question">
             Question
           </Form.Label>
@@ -59,7 +59,7 @@ const CreateCardForm = ({ deckParam }) => {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="cardA">
+        <Form.Group className="mb-3">
           <Form.Label className="modal-text text-center" htmlFor="answer">
             Answer
           </Form.Label>
