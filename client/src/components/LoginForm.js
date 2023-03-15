@@ -17,9 +17,11 @@ const LoginForm = () => {
         variables: { ...values },
       });
 
-      const user = data.login.user.username;
+      const user = data.login.user.username
+
       Auth.login(data.login.token);
-      window.location.assign(`/${user}/decks`);
+      window.location.assign(`/${user}/decks`)
+      
     } catch (error) {
       console.error(error);
       setShowAlert(true);
