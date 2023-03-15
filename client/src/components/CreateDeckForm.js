@@ -28,7 +28,7 @@ const CreateDeckForm = ({ username }) => {
         }
 
     }
-  };
+  
 
   const handleChange = (e) => {
     console.log(e);
