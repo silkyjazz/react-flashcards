@@ -30,7 +30,7 @@ function CardWithModal() {
 
   const study = (event) => {
     event.preventDefault();
-    window.location.assign("/:deckId/study");
+    window.location.assign(`/${deckParam}/study`);
   };
 
   const cards = data?.findSingleDeck.cards || [];

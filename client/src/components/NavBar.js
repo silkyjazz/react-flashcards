@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Modal, Button } from "react-bootstrap";
 import logo from "../images/logo-yellow.png";
 import SignUpForm from './SignupForm';
@@ -34,12 +33,9 @@ const AppNavbar = () => {
           <Navbar.Brand href="/" id="title">
             <img className="navbar-logo" src={logo} alt="logo" />
             STUDY.io 
-             {/* {'\n'}  <h6 className="justify-content-center">...in a flash</h6> */}
           </Navbar.Brand>
          
-
           <Nav className="ml-auto">
-
 
           {Auth.loggedIn() ? (
            <>
@@ -89,24 +85,3 @@ const AppNavbar = () => {
 
 
 export default AppNavbar;
-
-
-{/* <Modal show={show} onHide={handleClose}>
-<Modal.Header closeButton>
-  
-  <Modal.Title id="signup-modal">Create an Account</Modal.Title>
-
-</Modal.Header> */}
-{/* <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-<Modal.Footer>
-  <Button  variant="secondary" onClick={handleClose}>
-    Close
-  </Button>
-  <Button  variant="secondary" onClick={handleClose}>
-    Save Changes
-  </Button> */}
-{/* </Modal.Footer> */}
-{/* <Modal.Body>
-  <SignUpForm handleModalClose={() => setShow(false)}/>
-</Modal.Body>
-</Modal> */}
