@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { Navbar, Nav, Container, Modal, Button } from "react-bootstrap";
 import logo from "../images/logo-yellow.png";
-import SignUpForm from './SignupForm';
-import LoginForm from './LoginForm';
-import Auth from '../utils/auth';
+import SignUpForm from "./SignupForm";
+import LoginForm from "./LoginForm";
+import Auth from "../utils/auth";
 
 const AppNavbar = () => {
   const [show, setShow] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
-  
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -32,48 +31,77 @@ const AppNavbar = () => {
         <Container>
           <Navbar.Brand href="/" id="title">
             <img className="navbar-logo" src={logo} alt="logo" />
-            STUDY.io 
+            STUDY.io
           </Navbar.Brand>
-         
+
           <Nav className="ml-auto">
-
-          {Auth.loggedIn() ? (
-           <>
-          <Button variant="secondary" onClick={logout} style={{ backgroundColor: '#F7C04A' }} className="btn">
-              Logout
-            </Button>
-            <Button variant="secondary" onClick={decks} style={{ backgroundColor: '#F7C04A' }} className="btn">
-              Decks
-            </Button>
-            </>
-          ) : (
-            <>
-
-            <Button variant="secondary" onClick={handleShow} style={{ backgroundColor: '#F7C04A' }} className="btn">
-              Log In
-            </Button>
-            <Button variant="secondary" onClick={handleShowLogin} style={{ backgroundColor: '#3F497F' }}  className="btn">
-              Sign Up
-            </Button>
-            </>
-          )}
+            {Auth.loggedIn() ? (
+              <>
+                <Button
+                  variant="secondary"
+                  onClick={logout}
+                  style={{ backgroundColor: "#F7C04A" }}
+                  className="btn"
+                >
+                  Logout
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={decks}
+                  style={{ backgroundColor: "#F7C04A" }}
+                  className="btn"
+                >
+                  Decks
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  variant="secondary"
+                  onClick={handleShow}
+                  style={{ backgroundColor: "#F7C04A" }}
+                  className="btn"
+                >
+                  Log In
+                </Button>
+                <Button
+                  variant="secondary"
+                  onClick={handleShowLogin}
+                  style={{ backgroundColor: "#3F497F" }}
+                  className="btn"
+                >
+                  Sign Up
+                </Button>
+              </>
+            )}
           </Nav>
-
         </Container>
       </Navbar>
-      <Modal show={show} onHide={handleClose}    aria-labelledby="contained-modal-title-vcenter"
-        centered>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
         <Modal.Header closeButton>
-          <Modal.Title className="modal-text" id="login-modal">Log In</Modal.Title>
+          <Modal.Title className="modal-text" id="login-modal">
+            Log In
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <LoginForm handleModalClose={() => setShow(false)} />
         </Modal.Body>
       </Modal>
-      <Modal show={showLogin} onHide={handleCloseLogin}    aria-labelledby="contained-modal-title-vcenter"
-        centered>
+      <Modal
+        show={showLogin}
+        onHide={handleCloseLogin}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
         <Modal.Header closeButton>
-          <Modal.Title className="modal-text"  id="signup-modal">Create an Account</Modal.Title>
+          <Modal.Title className="modal-text" id="signup-modal">
+            Create an Account
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <SignUpForm handleModalClose={() => setShowLogin(false)} />
@@ -82,6 +110,5 @@ const AppNavbar = () => {
     </>
   );
 };
-
 
 export default AppNavbar;

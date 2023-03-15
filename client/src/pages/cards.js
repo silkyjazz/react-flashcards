@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
-// route should be /:deckId/cards
-// get ID of the deck
 import { useParams } from "react-router-dom";
-// query GET the deck on the param
 import { useQuery } from "@apollo/client";
 import { QUERY_DECK } from "../utils/query";
 
-import { useMutation } from "@apollo/client";
-import { CREATE_CARD, UPDATE_CARD, DELETE_CARD } from "../utils/mutation";
+// import { useMutation } from "@apollo/client";
+// import { CREATE_CARD, UPDATE_CARD, DELETE_CARD } from "../utils/mutation";
 
 import logo from "../images/logo-yellow.png";
 import CardList from "../components/CardList";
-import { Link } from "react-router-dom";
-import { Card, Modal, Button, Row, Col } from "react-bootstrap";
+import { Card, Modal, Row, Col } from "react-bootstrap";
 import CreateCardForm from "../components/CreateCardForm";
 
 function CardWithModal() {
@@ -23,7 +19,7 @@ function CardWithModal() {
   // Get all cards from DB
   const { deckId: deckParam } = useParams();
   const { loading, data } = useQuery(QUERY_DECK, {
-    variables: { 
+    variables: {
       _id: deckParam,
     },
   });
@@ -32,7 +28,10 @@ function CardWithModal() {
 
   const study = (event) => {
     event.preventDefault();
-    window.location.assign(`/${deckParam}/study`);
+    const deckId = data?.findSingleDeck._id;
+    if (deckId) {
+      window.location.assign(`/${deckId}/study`);
+    }
   };
 
   const cards = data?.findSingleDeck.cards || [];
@@ -41,20 +40,22 @@ function CardWithModal() {
   if (loading) {
     return <h1>Loading...</h1>;
   }
-  console.log(deckParam)
-  console.log(data)
+  console.log(deckParam);
+  console.log(data);
   return (
     <>
       {/* title for the page */}
       <Row>
         <h3 className="deck-title text-center">Study Cards</h3>
         {/* STUDY BUTTON */}
-        <Col xs={12} sm={12} md={4} lg={12} className="d-flex justify-content-center">
-          <Card
-            className="text-center  m-3"
-            onClick={study} 
-            id="study-btn"
-          >
+        <Col
+          xs={12}
+          sm={12}
+          md={4}
+          lg={12}
+          className="d-flex justify-content-center"
+        >
+          <Card className="text-center  m-3" onClick={study} id="study-btn">
             <Card.Body>
               <Card.Text className="card-page-text">
                 {" "}
@@ -68,12 +69,14 @@ function CardWithModal() {
 
       {/* create new card and Card List */}
       <Row className="g-4 m-1">
-        <Col xs={12} sm={12} md={4} lg={3} >
-          <Card className="text-center" onClick={handleCardClick}  style={{ height: "300px" }}>
+        <Col xs={12} sm={12} md={4} lg={3}>
+          <Card
+            className="text-center"
+            onClick={handleCardClick}
+            style={{ height: "300px" }}
+          >
             <Card.Body>
-              <Card.Text className="new-card-text">
-                + Create New Card
-              </Card.Text>
+              <Card.Text className="new-card-text">+ Create New Card</Card.Text>
             </Card.Body>
           </Card>
         </Col>
@@ -96,11 +99,8 @@ function CardWithModal() {
           <Modal.Title className="modal-text ">Create New Card</Modal.Title>
         </Modal.Header>
         <Modal.Body id="contained-modal-title-vcenter">
-          <CreateCardForm 
-          deckParam={deckParam}
-          />
+          <CreateCardForm deckParam={deckParam} />
         </Modal.Body>
-       
       </Modal>
     </>
   );

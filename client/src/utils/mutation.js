@@ -3,6 +3,7 @@ import { gql } from "@apollo/client";
 export const CREATE_DECK = gql`
   mutation createDeck($username: String!, $name: String!) {
     createDeck(username: $username, name: $name) {
+      _id
       username
       name
     }
@@ -12,7 +13,7 @@ export const CREATE_DECK = gql`
 export const CREATE_CARD = gql`
   mutation CreateCard($deckId: ID!, $question: String!, $answer: String!) {
     createCard(deckId: $deckId, question: $question, answer: $answer) {
-      deckId
+      _id
       question
       answer
     }
@@ -65,23 +66,24 @@ export const UPDATE_CARD = gql`
 `;
 
 export const CREATE_USER = gql`
-mutation createUser($username: String!, $email: String!, $password: String!) {
+  mutation createUser($username: String!, $email: String!, $password: String!) {
     createUser(username: $username, email: $email, password: $password) {
       token
-      user
-      {_id
-      username
-      email
-      decks {
-        username
-        name
-        cards {
-          _id
-          question
-          answer
-        }
+      user {
         _id
-      }}
+        username
+        email
+        decks {
+          username
+          name
+          cards {
+            _id
+            question
+            answer
+          }
+          _id
+        }
+      }
     }
   }
 `;
@@ -90,11 +92,10 @@ export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
-      user
-   {   
-    _id
-      username
-    }
+      user {
+        _id
+        username
+      }
     }
   }
 `;
