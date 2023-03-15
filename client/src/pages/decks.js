@@ -23,7 +23,6 @@ const Decks = () => {
   const decks = data?.findAllDecks || {};
 
   if (loading) {
-  console.log(usernameParam)
     return <div>Loading...</div>;
   }
 

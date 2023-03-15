@@ -93,7 +93,8 @@ function CardWithModal() {
           <Modal.Title className="modal-text ">Create New Card</Modal.Title>
         </Modal.Header>
         <Modal.Body id="contained-modal-title-vcenter">
-          <CreateCardForm />
+          <CreateCardForm 
+          deckId={deckParam}/>
         </Modal.Body>
         {/* <Modal.Footer>
           <Button variant="secondary" onClick={handleModalClose}>
