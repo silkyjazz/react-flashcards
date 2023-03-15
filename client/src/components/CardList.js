@@ -4,9 +4,13 @@ import { Navbar, Nav, Container, Modal, Button, Form } from "react-bootstrap";
 
 const CardList = ({ card }) => {
   const [showMondal, setShowModal] = useState(false);
+  const [showDeleteMondal, setShowDeleteModal] = useState(false);
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
+
+  const handleDeleteClose = () => setShowDeleteModal(false);
+  const handleDeleteShow = () => setShowDeleteModal(true);
 
   //Sets the state to false so the question text will render on the card
   const [showAnswer, setShowAnswer] = useState(false);
@@ -31,20 +35,25 @@ const CardList = ({ card }) => {
         </Card>
         <Button
           variant="secondary"
-          onClick={handleShow}
+          onClick={handleDeleteShow}
           style={{ backgroundColor: "#F7C04A" }}
           className="btn"
         >
           Update
         </Button>
-        {/* //    <Button variant="secondary" onClick={handleShowLogin} style={{ backgroundColor: '#3F497F' }}  className="btn">
-    //      Delete
-    //    </Button> */}
+        <Button
+          variant="secondary"
+          onClick={handleShow}
+          style={{ backgroundColor: "#3F497F" }}
+          className="btn"
+        >
+          Delete
+        </Button>
       </div>
 
       <Modal
-        show={showMondal}
-        onHide={handleClose}
+        show={showDeleteMondal}
+        onHide={handleDeleteClose}
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
@@ -75,6 +84,35 @@ const CardList = ({ card }) => {
             Save Update
           </Button>
         </Modal.Footer>
+      </Modal>
+
+      <Modal
+        show={showMondal}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        {/* <Modal.Dialog   show={showMondal}
+        onHide={handleClose}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered> */}
+          <Modal.Header closeButton>
+            <Modal.Title>Delete Card?</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <p>Are you sure you want to delete this card?</p>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Keep card
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Delete Card
+            </Button>
+          </Modal.Footer>
+        {/* </Modal.Dialog> */}
       </Modal>
     </>
   );
