@@ -95,14 +95,14 @@ function CardWithModal() {
         <Modal.Body id="contained-modal-title-vcenter">
           <CreateCardForm />
         </Modal.Body>
-        <Modal.Footer>
+        {/* <Modal.Footer>
           <Button variant="secondary" onClick={handleModalClose}>
             Close
           </Button>
           <Button variant="primary" onClick={handleModalClose}>
             Save changes
           </Button>
-        </Modal.Footer>
+        </Modal.Footer> */}
       </Modal>
     </>
   );
