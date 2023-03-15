@@ -12,16 +12,14 @@ const LoginForm = () => {
 
   const onSubmit = async (values, actions) => {
     try {
-      
       const { data } = await login({
         variables: { ...values },
       });
 
-      const user = data.login.user.username
+      const user = data.login.user.username;
 
       Auth.login(data.login.token);
-      window.location.assign(`/${user}/decks`)
-      
+      window.location.assign(`/${user}/decks`);
     } catch (error) {
       console.error(error);
       setShowAlert(true);
@@ -47,12 +45,17 @@ const LoginForm = () => {
   });
 
   if (error) {
-    console.error('error on useMutation loginform.js', error)
+    console.error("error on useMutation loginform.js", error);
   }
 
   return (
     <>
-      <Form noValidate validated={validated} onSubmit={handleSubmit} autoComplete="off">
+      <Form
+        noValidate
+        validated={validated}
+        onSubmit={handleSubmit}
+        autoComplete="off"
+      >
         <Alert
           dismissible
           onClose={() => setShowAlert(false)}

@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
-import {useQuery} from '@apollo/client';
-import {QUERY_DECK} from '../utils/query';
+import { useQuery } from "@apollo/client";
+import { QUERY_DECK } from "../utils/query";
 import { useParams } from "react-router-dom";
 
-
-function Study({deckId}) {
-
+function Study({ deckId }) {
   const [flipped, setFlipped] = useState(false);
 
   //Get all cards by deck ID
@@ -15,19 +13,20 @@ function Study({deckId}) {
   //Click through array of cards
   //Shuffle deck
 
-
   const { deckId: deckParam } = useParams();
 
   const { loading, data, error } = useQuery(QUERY_DECK, {
     variables: { _id: deckParam },
   });
 
-  const [cards, setCards] = useState([])
+  const [cards, setCards] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(()=>{
-    if(data){
-      const shuffledCards = data.findSingleDeck.cards.sort(() => Math.random() - 0.5);
+  useEffect(() => {
+    if (data) {
+      const shuffledCards = data.findSingleDeck.cards.sort(
+        () => Math.random() - 0.5
+      );
       setCards(shuffledCards);
     }
   }, [data]);
@@ -62,7 +61,9 @@ function Study({deckId}) {
           <Card onClick={handleClick}>
             <Card.Body className={`flashcard ${flipped ? "flipped" : ""}`}>
               <Card.Text className="flashcard-text front">
-              {flipped ? currentCard.findSingleDeckanswer : currentCard.findSingleDeck.question}
+                {flipped
+                  ? currentCard.findSingleDeckanswer
+                  : currentCard.findSingleDeck.question}
               </Card.Text>
             </Card.Body>
           </Card>
@@ -76,9 +77,11 @@ function Study({deckId}) {
             >
               Previous
             </Button>
-            <Button variant="secondary" 
-             onClick={handleNext} 
-             style={{ backgroundColor: "#F7C04A" }}>
+            <Button
+              variant="secondary"
+              onClick={handleNext}
+              style={{ backgroundColor: "#F7C04A" }}
+            >
               Next
             </Button>
           </Col>

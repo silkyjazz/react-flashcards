@@ -5,70 +5,74 @@ import { CREATE_USER } from "../utils/mutation";
 import swal from "sweetalert";
 import Auth from "../utils/auth";
 import { useFormik } from "formik";
-import { signUpSchema } from "../utils/formValidationSchema"
+import { signUpSchema } from "../utils/formValidationSchema";
 
 const SignupForm = () => {
-  const [createUser, { loading, error }] = useMutation(CREATE_USER);
-    // set state for form validation
-    // set state for alert
-    const [validated] = useState(false);
-    const [showAlert, setShowAlert] = useState(false);
-  
-    useEffect(() => {
-      if (error) {
-        setShowAlert(true);
-      } else {
-        setShowAlert(false);
-      }
-    }, [error]);
+  const [createUser, { error }] = useMutation(CREATE_USER);
+  if (error) {
+    console.error("error on useMutation signup.js", error);
+  }
+  // set state for form validation
+  // set state for alert
+  const [validated] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
-
-    const onSubmit = async (values, actions) => {
-      try {
-        const { data } = await createUser({
-          variables: { ...values},
-        });
-        const user = data.createUser.user.username;
-
-        Auth.login(data.createUser.token);
-        setShowAlert(false);
-        swal("Success!", "Account created successfully!", "success");
-        window.location.assign(`/${user}/decks`);
-      } catch (err) {
-        console.error(err);
-        setShowAlert(true);
-      }
-  
-      actions.resetForm();
-      console.log("Account created successfully!")
-    };
-  
-    const {
-      values,
-      errors,
-      touched,
-      isSubmitting,
-      handleChange,
-      handleSubmit,
-      handleBlur,
-    } = useFormik({
-      initialValues: {
-        username: "",
-        email: "",
-        password: "",
-      },
-      validationSchema: signUpSchema,
-      onSubmit,
-    });
-  
+  useEffect(() => {
     if (error) {
-      console.error('error on useMutation signup.js', error)
+      setShowAlert(true);
+    } else {
+      setShowAlert(false);
     }
+  }, [error]);
+
+  const onSubmit = async (values, actions) => {
+    try {
+      const { data } = await createUser({
+        variables: { ...values },
+      });
+      const currentUser = data.createUser.user.username;
+      // redirect user to /:username/deck... please check auth.js - login function.
+      Auth.login(data.createUser.token, currentUser);
+
+      setShowAlert(false);
+      swal("Success!", "Account created successfully!", "success");
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
+    }
+
+    actions.resetForm();
+    console.log("Account created successfully!");
+  };
+
+  const {
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    handleChange,
+    handleSubmit,
+    handleBlur,
+  } = useFormik({
+    initialValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
+    validationSchema: signUpSchema,
+    onSubmit,
+  });
+
 
   return (
     <>
       {/* This is needed for the validation functionality above */}
-      <Form noValidate validated={validated} onSubmit={handleSubmit} autoComplete="off">
+      <Form
+        noValidate
+        validated={validated}
+        onSubmit={handleSubmit}
+        autoComplete="off"
+      >
         <Alert
           dismissible
           onClose={() => setShowAlert(false)}
@@ -79,7 +83,9 @@ const SignupForm = () => {
         </Alert>
 
         <Form.Group>
-          <Form.Label className="modal-text" htmlFor="username">Username</Form.Label>
+          <Form.Label className="modal-text" htmlFor="username">
+            Username
+          </Form.Label>
           <Form.Control
             type="text"
             placeholder="Your username"
@@ -95,7 +101,9 @@ const SignupForm = () => {
         </Form.Group>
 
         <Form.Group>
-          <Form.Label className="modal-text" htmlFor="email">Email</Form.Label>
+          <Form.Label className="modal-text" htmlFor="email">
+            Email
+          </Form.Label>
           <Form.Control
             type="email"
             placeholder="Enter your email address"
@@ -111,7 +119,9 @@ const SignupForm = () => {
         </Form.Group>
 
         <Form.Group>
-          <Form.Label className="modal-text" htmlFor="password">Password</Form.Label>
+          <Form.Label className="modal-text" htmlFor="password">
+            Password
+          </Form.Label>
           <Form.Control
             type="password"
             placeholder="**********"
