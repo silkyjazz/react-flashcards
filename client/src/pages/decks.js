@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_DECKS } from "../utils/query";
 import { UPDATE_DECK, DELETE_DECK, } from "../utils/mutation"
 import DeckList from "../components/DeckList";
-import { Card, Modal, Button, Row, Col, Container } from "react-bootstrap";
+import {Row, Col, Container } from "react-bootstrap";
 
 const Decks = () => {
   const { username } = useParams();
