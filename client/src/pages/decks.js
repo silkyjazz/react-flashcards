@@ -23,6 +23,7 @@ const Decks = () => {
   const decks = data?.findAllDecks || {};
 
   if (loading) {
+  console.log(usernameParam)
     return <div>Loading...</div>;
   }
 
@@ -55,7 +56,8 @@ const Decks = () => {
         </Modal.Header>
 
         <Modal.Body id="contained-title-vcenter">
-          <CreateDeckForm />
+          <CreateDeckForm 
+          username={usernameParam}/>
         </Modal.Body>
         
         {/* <Modal.Footer>

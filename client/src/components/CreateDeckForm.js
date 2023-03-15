@@ -5,19 +5,20 @@ import { useMutation } from "@apollo/client";
 // import { QUERY_USER, QUERY_DECKS } from "../utils/query";
 // import { Modal, Button } from "bootstrap";
 
-const CreateDeckForm = () => {
+const CreateDeckForm = ({username}) => {
     const [deckName, setDeckName] = useState('')
-
     const [createDeck, {error}] = useMutation(CREATE_DECK)
-
+    console.log(username+ '-------------------')
     const handleFormSubmit = async (e) => {
         e.preventDefault()
 
         try {
             console.log(deckName)
             const { data } = await createDeck({
-                variables: { username: `username`, name: deckName },
+                variables: { username: username, name: deckName },
             })
+            console.log(username)
+
             setDeckName('')
         } catch (err) {
             console.error(err)
