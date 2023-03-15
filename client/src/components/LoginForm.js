@@ -10,45 +10,16 @@ const LoginForm = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [login, { error }] = useMutation(LOGIN_USER);
 
-<<<<<<< HEAD
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormState({ ...formState, [name]: value });
-  };
-
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-
-=======
   const onSubmit = async (values, actions) => {
->>>>>>> 94c6c5e0956c3de044e6b109e4398e1a000a4951
     try {
       
       const { data } = await login({
         variables: { ...values },
       });
-<<<<<<< HEAD
-      console.log('line 35----------------- loginform.js')
-      console.log(data.login)
-      const user = data.login.user.username
-      console.log(user)
-      Auth.login(data.login.token);
-     
-      window.location.assign(`/${user}/decks`)
-      
-=======
 
       const user = data.login.user.username;
       Auth.login(data.login.token);
       window.location.assign(`/${user}/decks`);
->>>>>>> 94c6c5e0956c3de044e6b109e4398e1a000a4951
     } catch (error) {
       console.error(error);
       setShowAlert(true);
