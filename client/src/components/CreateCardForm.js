@@ -11,30 +11,28 @@ const CreateCardForm = ({ deckParam }) => {
   if (error) {
     console.error("error on line 11 createCardForm.js", error);
   }
+    
+    const handleFormSubmit = async (e) => {
+        e.preventDefault()
+        console.log(deckParam)
+        try {
+            // console.log(questionBody)
+            // console.log(answerBody)
+            const {data} = await createCard({
+                variables: { deckId: deckParam, question: questionBody, answer: answerBody },
+            })
+            // console.log(questionBody)
+            // console.log(answerBody)
+            window.location.reload()
+            // window.location.assign(`/cards`)
+            setQuestionBody('')
+            setAnswerBody('')
+        } catch (error) {
+            console.log(JSON.stringify(error, null, 2))
+        }
 
-  const handleFormSubmit = async (e) => {
-    e.preventDefault();
-    console.log(deckParam);
-    try {
-      console.log(questionBody);
-      console.log(answerBody);
-      const { data } = await createCard({
-        variables: {
-          // i don't think we create card with deckId, check typeDefs
-          deckId: deckParam,
-          question: questionBody,
-          answer: answerBody,
-        },
-      });
-      console.log(questionBody);
-      console.log(answerBody);
-
-      setQuestionBody("");
-      setAnswerBody("");
-    } catch (err) {
-      console.log(JSON.stringify(err, null, 2));
     }
-  };
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,7 +42,7 @@ const CreateCardForm = ({ deckParam }) => {
     } else if (name === "answerName" && value.length <= 50) {
       setAnswerBody(value);
     }
-  };
+  }
 
   return (
     <div>

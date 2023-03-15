@@ -13,18 +13,22 @@ const CreateDeckForm = ({ username }) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      console.log(deckName);
-      const { data } = await createDeck({
-        variables: { username: username, name: deckName },
-      });
-      console.log(username);
+        try {
+            console.log(deckName)
+            const { data } = await createDeck({
+                variables: { username: username, name: deckName },
+            })
+            console.log(username)
+            debugger
+            // window.location.assign(`${username}/decks`)
+            window.location.reload()
+            setDeckName('')
+        } catch (err) {
+            console.error(err)
+        }
 
-      setDeckName("");
-    } catch (err) {
-      console.error(err);
     }
-  };
+  
 
   const handleChange = (e) => {
     console.log(e);

@@ -1,16 +1,20 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Card } from "react-bootstrap";
 import { Navbar, Nav, Container, Modal, Button, Form } from "react-bootstrap";
+// import { UPDATE_CARD } from "../utils/mutation";
+// import { useMutation } from "@apollo/client";
 
-const CardList = ({ card }) => {
-  const [showMondal, setShowModal] = useState(false);
+import { DeleteCardForm } from "./DeleteCardForm";
+
+const CardList = ({ deckParam, card }) => {
+  const [showModal, setShowModal] = useState(false);
   const [showDeleteMondal, setShowDeleteModal] = useState(false);
-
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
-
   const handleDeleteClose = () => setShowDeleteModal(false);
   const handleDeleteShow = () => setShowDeleteModal(true);
+
+
 
   //Sets the state to false so the question text will render on the card
   const [showAnswer, setShowAnswer] = useState(false);
@@ -18,9 +22,9 @@ const CardList = ({ card }) => {
   const handleCardClick = () => {
     setShowAnswer(!showAnswer);
   };
-
   //Checks the state to render question OR answer
   const display = showAnswer ? card.answer : card.question;
+  const cardId = card._id;
 
   return (
     <>
@@ -33,6 +37,7 @@ const CardList = ({ card }) => {
           {/* changing the state of the card text */}
           <Card.Text className="flashcard-text">{display} </Card.Text>
         </Card>
+
         <Button
           variant="secondary"
           onClick={handleDeleteShow}
@@ -41,16 +46,17 @@ const CardList = ({ card }) => {
         >
           Update
         </Button>
+
         <Button
-          variant="secondary"
+          variant="danger"
           onClick={handleShow}
-          style={{ backgroundColor: "#3F497F" }}
           className="btn"
         >
           Delete
         </Button>
       </div>
 
+      {/* update modal */}
       <Modal
         show={showDeleteMondal}
         onHide={handleDeleteClose}
@@ -80,6 +86,7 @@ const CardList = ({ card }) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
+          {/*TODO: use handleSubmit for updating */}
           <Button variant="primary" onClick={handleClose}>
             Save Update
           </Button>
@@ -87,32 +94,12 @@ const CardList = ({ card }) => {
       </Modal>
 
       <Modal
-        show={showMondal}
+        show={showModal}
         onHide={handleClose}
         aria-labelledby="contained-modal-title-vcenter"
         centered
       >
-        {/* <Modal.Dialog   show={showMondal}
-        onHide={handleClose}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered> */}
-          <Modal.Header closeButton>
-            <Modal.Title>Delete Card?</Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>
-            <p>Are you sure you want to delete this card?</p>
-          </Modal.Body>
-
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Keep card
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Delete Card
-            </Button>
-          </Modal.Footer>
-        {/* </Modal.Dialog> */}
+        <DeleteCardForm deckParam={deckParam} cardId={cardId}/>
       </Modal>
     </>
   );

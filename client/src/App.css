@@ -139,3 +139,10 @@ body {
   bottom: 0;
   width: 100%;
 }
+
+/* ---- page title ----- */
+.page-title {
+    color: var(--secondary-color);
+    font-family: 'Bungee', cursive;
+    font-size: 35px;
+}

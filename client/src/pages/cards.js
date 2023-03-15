@@ -4,7 +4,7 @@ import { useQuery } from "@apollo/client";
 import { QUERY_DECK } from "../utils/query";
 
 // import { useMutation } from "@apollo/client";
-// import { CREATE_CARD, UPDATE_CARD, DELETE_CARD } from "../utils/mutation";
+// import {  UPDATE_CARD, DELETE_CARD } from "../utils/mutation";
 
 import logo from "../images/logo-yellow.png";
 import CardList from "../components/CardList";
@@ -24,7 +24,9 @@ function CardWithModal() {
     },
   });
 
-  // Create/ update/ delete
+  // update/ delete
+
+
 
   const study = (event) => {
     event.preventDefault();
@@ -46,7 +48,7 @@ function CardWithModal() {
     <>
       {/* title for the page */}
       <Row>
-        <h3 className="deck-title text-center">Study Cards</h3>
+        <h3 className="page-title text-center">Study Cards</h3>
         {/* STUDY BUTTON */}
         <Col
           xs={12}
@@ -80,10 +82,10 @@ function CardWithModal() {
             </Card.Body>
           </Card>
         </Col>
-
+        {/* render each card */}
         {cards.map((card, index) => (
           <Col key={card._id} xs={12} sm={12} md={6} lg={3} className="g-4">
-            <CardList card={card} id={index} />
+            <CardList deckParam={deckParam} card={card} id={index} />
           </Col>
         ))}
       </Row>
