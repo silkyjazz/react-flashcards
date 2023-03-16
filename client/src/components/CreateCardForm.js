@@ -1,48 +1,41 @@
 import React, { useState } from "react";
 import { Form, Modal, Button } from "react-bootstrap";
 import { CREATE_CARD } from "../utils/mutation";
-import { useMutation } from "@apollo/client";
+import { useMutation } from '@apollo/client'
 
 const CreateCardForm = ({ deckParam }) => {
-  const [questionBody, setQuestionBody] = useState("");
-  const [answerBody, setAnswerBody] = useState("");
-  const [createCard, { error }] = useMutation(CREATE_CARD);
-  // console logging error from useMutation
-  if (error) {
-    console.error("error on line 11 createCardForm.js", error);
-  }
+    const [questionBody, setQuestionBody] = useState('')
+    const [answerBody, setAnswerBody] = useState('')
+    const [createCard, {error}] = useMutation(CREATE_CARD)
+
     
     const handleFormSubmit = async (e) => {
         e.preventDefault()
         console.log(deckParam)
         try {
-            // console.log(questionBody)
-            // console.log(answerBody)
+           
             const {data} = await createCard({
                 variables: { deckId: deckParam, question: questionBody, answer: answerBody },
             })
-            // console.log(questionBody)
-            // console.log(answerBody)
+        
             window.location.reload()
-            // window.location.assign(`/cards`)
+          
             setQuestionBody('')
             setAnswerBody('')
         } catch (error) {
             console.log(JSON.stringify(error, null, 2))
         }
-
     }
-  
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+    const handleChange = (e) => {
+        const {name, value} = e.target
 
-    if (name === "questionName" && value.length <= 40) {
-      setQuestionBody(value);
-    } else if (name === "answerName" && value.length <= 50) {
-      setAnswerBody(value);
+        if(name === 'questionName' && value.length <= 40) {
+            setQuestionBody(value)
+        } else if (name === 'answerName' && value.length <= 50) {
+            setAnswerBody(value)
+        }
     }
-  };
 
   return (
     <div>
@@ -59,20 +52,19 @@ const CreateCardForm = ({ deckParam }) => {
           />
         </Form.Group>
 
+
         <Form.Group className="mb-3">
+
           <Form.Label className="modal-text text-center" htmlFor="answer">
             Answer
           </Form.Label>
-          <Form.Control
-            name="answerName"
-            as="textarea"
-            onChange={handleChange}
-            rows={2}
-          />
+          <Form.Control name="answerName" as="textarea" onChange={handleChange} rows={2} />
         </Form.Group>
 
         <Modal.Footer>
-          <Button variant="secondary">Close</Button>
+          <Button variant="secondary" >
+            Close
+          </Button>
           <Button variant="primary" onClick={handleFormSubmit}>
             Save changes
           </Button>

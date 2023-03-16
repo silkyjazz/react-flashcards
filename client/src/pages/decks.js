@@ -28,6 +28,7 @@ const Decks = () => {
   return (
     <Container>
       <Row>
+      <h3 className="page-title text-center">Study Decks</h3>
         {/* button to show Card modal */}
         <Col md={{ span: 0 }}>
           <Card
