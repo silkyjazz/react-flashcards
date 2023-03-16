@@ -48,16 +48,17 @@ function CardWithModal() {
   return (
     <Container>
       {/* title for the page */}
-      <Row>
+      {/* <Row> */}
+      <Row className="g-4 m-1">
         <h3 className="page-title text-center">Study Cards</h3>
         {/* STUDY BUTTON */}
-        <Col
+        {/* <Col
           xs={12}
           sm={12}
           md={4}
           lg={12}
           className="d-flex justify-content-center"
-        >
+        > */}
           {/* <Card className="text-center  m-3" onClick={study} id="study-btn">
             <Card.Body>
               <Card.Text className="card-page-text">
@@ -67,7 +68,7 @@ function CardWithModal() {
               </Card.Text>
             </Card.Body>
           </Card> */}
-        </Col>
+        {/* </Col> */}
       {/* </Row> */}
 
       {/* create new card and Card List */}

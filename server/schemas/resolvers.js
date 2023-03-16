@@ -71,8 +71,8 @@ const resolvers = {
         );
 
         return newCard;
-      } catch (err) {
-        console.err(err);
+      } catch (error) {
+        console.error(error);
       }
     },
     updateDeck: async (parent, { deckId, name }) => {
