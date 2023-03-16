@@ -22,24 +22,34 @@ const AppNavbar = () => {
     Auth.logout();
   };
 
-  const [login, { error }] = useMutation(LOGIN_USER);
+  // const [login, { error }] = useMutation(LOGIN_USER);
 
-  const decks = async (values, actions) => {
+  // const decks = async (values, actions) => {
+  //   try {
+  //     const { data } = await login({
+  //       variables: { ...values },
+  //     });
+
+  //     const user = data.login.user.username;
+
+  //     // Auth.login(data.login.token);
+  //     window.location.assign(`/${user}/decks`);
+  //   } catch (error) {
+  //     console.error(error);
+  //     // setShowAlert(true);
+  //   }
+
+  //   actions.resetForm();
+  // };
+
+  const viewDecks = async () => {
     try {
-      const { data } = await login({
-        variables: { ...values },
-      });
-
-      const user = data.login.user.username;
-
-      // Auth.login(data.login.token);
-      window.location.assign(`/${user}/decks`);
+      const { data: { username } } = Auth.getProfile()
+      console.log(username);
+      window.location.assign(`/${username}/decks`);
     } catch (error) {
       console.error(error);
-      // setShowAlert(true);
     }
-
-    actions.resetForm();
   };
 
   return (
@@ -64,7 +74,7 @@ const AppNavbar = () => {
                 </Button>
                 <Button
                   variant="secondary"
-                  onClick={decks}
+                  onClick={viewDecks}
                   style={{ backgroundColor: "#F7C04A" }}
                   className="btn"
                 >
