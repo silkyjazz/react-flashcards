@@ -25,16 +25,17 @@ function CardWithModal() {
   });
 
   // update/ delete
+  // const [questionBody, setQuestionBody] = useState({ question: questionBody });
+  //   const [answerBody, setAnswerBody] = useState({ answer: answerBody });
 
 
-
-  const study = (event) => {
-    event.preventDefault();
-    const deckId = data?.findSingleDeck._id;
-    if (deckId) {
-      window.location.assign(`/${deckId}/study`);
-    }
-  };
+  // const study = (event) => {
+  //   event.preventDefault();
+  //   const deckId = data?.findSingleDeck._id;
+  //   if (deckId) {
+  //     window.location.assign(`/${deckId}/study`);
+  //   }
+  // };
 
   const cards = data?.findSingleDeck.cards || [];
 
@@ -57,7 +58,7 @@ function CardWithModal() {
           lg={12}
           className="d-flex justify-content-center"
         >
-          <Card className="text-center  m-3" onClick={study} id="study-btn">
+          {/* <Card className="text-center  m-3" onClick={study} id="study-btn">
             <Card.Body>
               <Card.Text className="card-page-text">
                 {" "}
@@ -65,7 +66,7 @@ function CardWithModal() {
                 Study
               </Card.Text>
             </Card.Body>
-          </Card>
+          </Card> */}
         </Col>
       </Row>
 
