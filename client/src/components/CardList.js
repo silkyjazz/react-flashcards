@@ -5,7 +5,6 @@ import { UPDATE_CARD } from "../utils/mutation";
 import { useMutation } from "@apollo/client";
 
 import { DeleteCardForm } from "./DeleteCardForm";
-import UpdateCard from "./UpdateCardForm";
 import UpdateCardModal from "./UpdateCardModal";
 
 import { useParams } from "react-router-dom";
