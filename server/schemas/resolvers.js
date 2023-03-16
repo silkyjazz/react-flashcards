@@ -1,7 +1,6 @@
 const { AuthenticationError } = require("apollo-server-express");
 const { Card, Deck, User } = require("../models");
-const { signToken } = require('../utils/auth');
-
+const { signToken } = require("../utils/auth");
 
 const resolvers = {
   Query: {
@@ -61,6 +60,7 @@ const resolvers = {
       // find user using context.user after auth works
       try {
         const newCard = await Card.create({
+          deckId,
           question,
           answer,
         });
@@ -69,10 +69,9 @@ const resolvers = {
           { $addToSet: { cards: newCard._id } },
           { new: true, runValidators: true, versionKey: false }
         );
-
         return newCard;
       } catch (err) {
-        console.err(err);
+        console.error(err);
       }
     },
     updateDeck: async (parent, { deckId, name }) => {
@@ -116,10 +115,9 @@ const resolvers = {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
       console.log("successfully created " + user);
-      
+
       return { token, user };
     },
- 
 
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });

@@ -138,8 +138,8 @@ const SignupForm = () => {
         <Button
           disabled={isSubmitting}
           type="submit"
-          variant="secondary"
-          className="signup-btn"
+          variant="success"
+          className="auth-btn"
         >
           Submit
         </Button>
