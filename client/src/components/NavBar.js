@@ -4,6 +4,8 @@ import logo from "../images/logo-yellow.png";
 import SignUpForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 import Auth from "../utils/auth";
+import { useMutation } from "@apollo/client";
+import { LOGIN_USER } from "../utils/mutation";
 
 const AppNavbar = () => {
   const [show, setShow] = useState(false);
@@ -20,9 +22,24 @@ const AppNavbar = () => {
     Auth.logout();
   };
 
-  const decks = (event) => {
-    event.preventDefault();
-    window.location.assign("/decks");
+  const [login, { error }] = useMutation(LOGIN_USER);
+
+  const decks = async (values, actions) => {
+    try {
+      const { data } = await login({
+        variables: { ...values },
+      });
+
+      const user = data.login.user.username;
+
+      // Auth.login(data.login.token);
+      window.location.assign(`/${user}/decks`);
+    } catch (error) {
+      console.error(error);
+      // setShowAlert(true);
+    }
+
+    actions.resetForm();
   };
 
   return (
