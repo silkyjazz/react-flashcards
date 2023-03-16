@@ -59,15 +59,6 @@ const Decks = () => {
           <Modal.Body id="contained-title-vcenter">
             <CreateDeckForm username={usernameParam} />
           </Modal.Body>
-
-          {/* <Modal.Footer>
-          <Button variant="secondary" onClick={handleModalClose}>
-            Close
-          </Button>
-          <Button type="submit" variant="primary" onClick={handleFormSubmit}>
-            Save changes
-          </Button>
-        </Modal.Footer> */}
         </Modal>
         {/* list of our decks */}
         {decks.map((deck, index) => (

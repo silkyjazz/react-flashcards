@@ -21,7 +21,7 @@ const cardSchema = new Schema({
         type: Date,
         default: Date.now,
         get: (timestamp) => dateFormat(timestamp),
-      },
+    },
 })
 
 // create an instance of Card schema

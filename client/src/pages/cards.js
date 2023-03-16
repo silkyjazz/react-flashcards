@@ -75,7 +75,7 @@ function CardWithModal() {
           <Card
             className="text-center"
             onClick={handleCardClick}
-            style={{ height: "300px" }}
+            style={{ height: "200px" }}
           >
             <Card.Body>
               <Card.Text className="new-card-text">+ Create New Card</Card.Text>

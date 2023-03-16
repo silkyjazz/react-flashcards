@@ -29,7 +29,7 @@ const CardList = ({ deckParam, card }) => {
       <div>
         <Card
           className="text-center"
-          style={{ height: "300px" }}
+          style={{ height: "200px" }}
           onClick={handleCardClick}
         >
           {/* changing the state of the card text */}
