@@ -76,7 +76,8 @@ body {
 }
 
 /* ------ sign up page ------ */
-.signup-btn {
+.auth-btn {
+    margin-top:8px;
     display: flex;
     justify-content: center;
     align-items: center;
