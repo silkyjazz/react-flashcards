@@ -4,10 +4,10 @@ import logo from "../images/logo-yellow.png";
 import SignUpForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 import Auth from "../utils/auth";
-import { useMutation } from "@apollo/client";
-import { LOGIN_USER } from "../utils/mutation";
+import { useNavigate } from "react-router-dom";
 
 const AppNavbar = () => {
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
 
@@ -20,6 +20,7 @@ const AppNavbar = () => {
   const logout = (event) => {
     event.preventDefault();
     Auth.logout();
+    navigate('/')
   };
 
   // const [login, { error }] = useMutation(LOGIN_USER);
@@ -104,6 +105,7 @@ const AppNavbar = () => {
           </Nav>
         </Container>
       </Navbar>
+      {/* login modal */}
       <Modal
         show={show}
         onHide={handleClose}
@@ -116,9 +118,11 @@ const AppNavbar = () => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+          {/* pass close model */}
           <LoginForm handleModalClose={() => setShow(false)} />
         </Modal.Body>
       </Modal>
+      {/* create account modal */}
       <Modal
         show={showLogin}
         onHide={handleCloseLogin}
@@ -138,4 +142,4 @@ const AppNavbar = () => {
   );
 };
 
-export default AppNavbar;
+export default AppNavbar; 
