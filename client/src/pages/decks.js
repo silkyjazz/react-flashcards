@@ -34,12 +34,13 @@ const Decks = () => {
         {/* button to show Card modal */}
         <Col md={{ span: 0 }}>
           <Card
-            className="text-center"
+            className="text-center mt-4"
             onClick={handleCardClick}
-            style={{ width: "25rem" }}
+            style={{ height: "200px" }}
           >
             <Card.Body>
-              <Card.Text className="card-page-text">
+              <Card.Text className="new-deck-text"
+              >
                 + Create New Deck
               </Card.Text>
             </Card.Body>
@@ -71,7 +72,7 @@ const Decks = () => {
         </Modal>
         {/* list of our decks */}
         {decks.map((deck, index) => (
-          <Col key={deck._id} xs={1} md={4} className="g-4">
+          <Col key={deck._id}  xs={12} sm={12} md={4} lg={3} className="g-4">
             <DeckList deck={deck} id={index} />
           </Col>
         ))}

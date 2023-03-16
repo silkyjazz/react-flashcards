@@ -52,7 +52,9 @@ const CreateCardForm = ({ deckParam }) => {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" >
+
+        <Form.Group className="mb-3">
+
           <Form.Label className="modal-text text-center" htmlFor="answer">
             Answer
           </Form.Label>
