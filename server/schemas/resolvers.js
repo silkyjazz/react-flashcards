@@ -70,8 +70,8 @@ const resolvers = {
           { new: true, runValidators: true, versionKey: false }
         );
         return newCard;
-      } catch (err) {
-        console.error(err);
+      } catch (error) {
+        console.error(error);
       }
     },
     updateDeck: async (parent, { deckId, name }) => {

@@ -30,7 +30,7 @@ const Decks = () => {
       <Row>
       <h3 className="page-title text-center">Study Decks</h3>
         {/* button to show Card modal */}
-        <Col md={{ span: 0 }}>
+        <Col  xs={12} sm={12} md={4} lg={3}>
           <Card
             className="text-center mt-4"
             onClick={handleCardClick}
