@@ -106,6 +106,7 @@ const LoginForm = () => {
           disabled={isSubmitting}
           type="submit"
           variant="success"
+          className="auth-btn"
         >
           Submit
         </Button>
