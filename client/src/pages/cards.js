@@ -8,7 +8,7 @@ import { QUERY_DECK } from "../utils/query";
 
 import logo from "../images/logo-yellow.png";
 import CardList from "../components/CardList";
-import { Card, Modal, Row, Col } from "react-bootstrap";
+import { Card, Modal, Row, Col, Container } from "react-bootstrap";
 import CreateCardForm from "../components/CreateCardForm";
 
 function CardWithModal() {
@@ -45,9 +45,9 @@ function CardWithModal() {
   console.log(deckParam);
   console.log(data);
   return (
-    <>
+    <Container>
       {/* title for the page */}
-      <Row>
+      <Row className="g-4">
         <h3 className="deck-title text-center">Study Cards</h3>
         {/* STUDY BUTTON */}
         <Col
@@ -67,10 +67,10 @@ function CardWithModal() {
             </Card.Body>
           </Card>
         </Col>
-      </Row>
+      {/* </Row> */}
 
       {/* create new card and Card List */}
-      <Row className="g-4 m-1">
+      {/* <Row className="g-4 m-1"> */}
         <Col xs={12} sm={12} md={4} lg={3}>
           <Card
             className="text-center"
@@ -104,7 +104,7 @@ function CardWithModal() {
           <CreateCardForm deckParam={deckParam} />
         </Modal.Body>
       </Modal>
-    </>
+      </Container>
   );
 }
 

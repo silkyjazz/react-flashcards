@@ -25,8 +25,6 @@ const Decks = () => {
     return <div>Loading...</div>;
   }
 
-  // TODO UPDATE_DECK, DELETE_DECK
-
   return (
     <Container>
       <Row>
