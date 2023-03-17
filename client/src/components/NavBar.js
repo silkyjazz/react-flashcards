@@ -47,7 +47,8 @@ const AppNavbar = () => {
     try {
       const { data: { username } } = Auth.getProfile()
       console.log(username);
-      window.location.assign(`/${username}/decks`);
+      navigate(`/${username}/decks`);
+     
     } catch (error) {
       console.error(error);
     }
