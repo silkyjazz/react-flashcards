@@ -24,6 +24,10 @@ function CardWithModal() {
     },
   });
 
+  // useEffect(() => {
+  //   // code to run
+  // }, [cards]);
+  
   // update/ delete
   // const [questionBody, setQuestionBody] = useState({ question: questionBody });
   //   const [answerBody, setAnswerBody] = useState({ answer: answerBody });
@@ -103,7 +107,7 @@ function CardWithModal() {
           <Modal.Title className="modal-text ">Create New Card</Modal.Title>
         </Modal.Header>
         <Modal.Body id="contained-modal-title-vcenter">
-          <CreateCardForm deckParam={deckParam} />
+          <CreateCardForm handleModalClose={handleModalClose} deckParam={deckParam} />
         </Modal.Body>
       </Modal>
       </Container>

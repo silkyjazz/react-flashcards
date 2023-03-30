@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 import { Form, Modal, Button } from "react-bootstrap";
 import { CREATE_CARD } from "../utils/mutation";
-import { useMutation } from "@apollo/client";
+// import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
+import { useQuery, useMutation, gql } from "@apollo/client";
+ import {QUERY_DECK} from "../utils/query";
 
-const CreateCardForm = ({ deckParam }) => {
+const CreateCardForm = ({ handleModalClose, deckParam }) => {
   const [questionBody, setQuestionBody] = useState("");
   const [answerBody, setAnswerBody] = useState("");
-  const [createCard, { error }] = useMutation(CREATE_CARD);
+  const { loading, data, refetch } = useQuery(QUERY_DECK, {
+    variables: {
+      _id: deckParam,
+    },
+  });
+  const [createCard, { error }] = useMutation(CREATE_CARD, {
+    // specify which queries should be refetched after the mutation
+    refetchQueries: [{ query: QUERY_DECK, variables: { _id: deckParam } }],
+  });
   const navigate = useNavigate();
   
   const handleFormSubmit = async (e) => {
@@ -21,7 +31,9 @@ const CreateCardForm = ({ deckParam }) => {
           answer: answerBody,
         },
       });
-      window.location.reload();
+      // window.location.reload();
+      refetch();
+      handleModalClose();
       setQuestionBody("");
       setAnswerBody("");
     } catch (error) {
