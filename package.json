@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/silkyjazz/react-flashcards#readme",
   "dependencies": {
-    "concurrently": "^7.6.0"
+    "concurrently": "^7.6.0",
+    "react-refresh": "^0.14.0"
   }
 }
