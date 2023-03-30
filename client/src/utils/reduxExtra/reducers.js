@@ -1,8 +1,8 @@
 
 // its for /:deck/study
 
-import { CREATE_DECK, CREATE_CARD, DELETE_DECK, DELETE_CARD } from '../utils/actions';
-import { UPDATE_CARD } from './mutation';
+import { CREATE_DECK, CREATE_CARD, DELETE_DECK, DELETE_CARD } from './actions';
+import { UPDATE_CARD } from '../mutation';
 
 
 
